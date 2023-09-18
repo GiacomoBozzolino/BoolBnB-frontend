@@ -65,26 +65,26 @@ export default {
 
 <style lang="scss" scoped>
 .logo {
-    color: #EDFFAB;
+    color: #000000;
     transition: background-color 1s;
 }
 
 .logo:hover {
-    background-color: #edffab;
+    background-color: #B2B5E0;
     color: black;
 }
 
 .link-hover-header {
-    color: #C8FFBE;
+    color: #000000;
 }
 
 .link-hover-header:hover {
     // background-color: #DFBE99;
-    background-color: #EDFFAB;
+    background-color: #B2B5E0;
 }
 
 .nav-background {
-    background-color: #89608E;
+    background-color: #C5ADC5;
 }
 
 .drop-down:hover {

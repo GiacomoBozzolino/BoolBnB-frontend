@@ -1,7 +1,37 @@
 <script>
+    // importo stro e aCSios dove si trova la base API
+    import { store } from '../store';
+    import axios from 'axios';
+
+
+
     export default {
-        name: "HomePage"
-        
+        name: "HomePage",
+
+        data() {
+            return {
+                store,
+            }
+        },
+
+        methods: {
+            getApartments(){
+                // store.loading = true
+                axios.get(`${store.apartmensUrl}/api/apartments`).then((response) =>{
+                    store.apartments = response.data.results;
+                    console.log(store.apartments);
+                    // per il loading
+                    // if(response.data.success){
+                    //     store.apartments = response.data.resuslts;
+                    //     store.loading = false;
+                    // }
+                })
+            }
+        },
+
+        created(){
+            this.getApartments();
+        },
     }
 </script>
 
@@ -9,27 +39,29 @@
 <template >
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <h1 class="text-center">BoolBnB</h1>
-            </div>
-        </div> 
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 mt-3">
-                <p>
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien sapien, faucibus at nunc in, condimentum commodo magna. Maecenas rutrum, diam et ultricies ultricies, dolor turpis placerat lorem, sed rutrum metus purus in justo. Donec massa nisl, rhoncus vel nisl et, semper lacinia ligula. Nunc tincidunt urna ut ipsum consequat, et dapibus magna luctus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent interdum suscipit dignissim. Etiam sagittis cursus elit, et laoreet turpis ullamcorper at. Duis vitae bibendum leo. Nullam risus nibh, tempor quis est at, pellentesque gravida nisl. Phasellus eget leo a tellus feugiat condimentum. Praesent auctor ipsum est.
-                </p>
-                <p>
-                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam id velit eu elit luctus aliquam eget id nunc. Morbi consequat mauris eget nibh vestibulum dictum. Morbi ut justo ac erat aliquam vehicula quis et sapien. In augue purus, tincidunt vel mi in, vestibulum ultricies orci. Vestibulum molestie sagittis hendrerit. Nullam nec orci urna. Nulla eu tristique arcu. Cras lectus mauris, ultrices sed nisl id, faucibus volutpat dui. Phasellus sed mollis lacus. In fringilla magna sed augue dapibus, nec bibendum dolor sollicitudin. Proin vel diam eu neque elementum pharetra sed vel felis. Mauris mi purus, dapibus hendrerit sapien eu, ullamcorper auctor quam.
-
-                </p>
-                <p>
-                    Ut vehicula ex ac eros tempus, viverra mattis tortor placerat. Fusce sit amet ultricies nunc. Duis libero eros, sollicitudin in est a, consectetur commodo nibh. Donec blandit aliquam quam sit amet tincidunt. Duis egestas ipsum sit amet facilisis varius. Vestibulum ultricies semper consectetur. Cras interdum tempus ipsum, sed venenatis sapien. Nam sit amet ipsum sollicitudin tortor tempor commodo ac vitae ex. Ut rhoncus aliquam justo, at tristique felis consectetur in. Sed ultricies ligula imperdiet, consequat enim at, accumsan nibh. Sed ut ligula molestie, rutrum nibh sed, sagittis orci. Nullam id libero placerat, gravida augue sed, gravida massa.
-                </p>
+            <div class="col-12 d-flex flex-wrap my-4">
+                <div class="card m-3" style="width: 23rem; height: 45rem" v-for="(items, index) in  store.apartments " :key="index">
+                    <div class="card-image-top">
+                        <!-- da sistemare lo storage -->
+                        <img :src="`${baseUrl}/storage/${items.cover_img}`" class="img-fluid">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">{{ items.title }}</h4>
+                        <div class="description-card overflow-auto mt-2">
+                            <p class="card-text py-2 text-start">{{ items.description }}</p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-person-shelter"></i> Numero letti: <strong>{{ items.n_rooms}}</strong></p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-bath"></i> Numero bagni: <strong>{{ items.n_bathrooms }}</strong></p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-bed"></i> Numero letto: <strong>{{ items.n_beds }}</strong></p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-file-medical"></i> Breve descrizione: <strong>{{ items.description }}</strong></p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-ruler-combined"></i> Metri quadri: <strong>{{ items.square_meters}}</strong></p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-sm btn-primary"> Leggi il progetto</a>
+                    </div>
+                </div>
             </div>
         </div>
-        
     </div>
 </template>
 
@@ -38,5 +70,7 @@
 
 
 <style lang="scss" scoped>
-    
+    .z{
+        background-color: red;
+    }
 </style>
