@@ -70,7 +70,7 @@
 
 
 <style lang="scss" scoped>
-    .z.z{
+    .z{
         background-color: red;
     }
 </style>
