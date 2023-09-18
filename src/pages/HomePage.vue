@@ -39,14 +39,21 @@
 <template >
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-4" v-for="(items, index) in  store.apartments " :key="index">
-                <div class="card my-3 min-height-200px">
+            <div class="col-12 d-flex flex-wrap my-4">
+                <div class="card m-3" style="width: 23rem; height: 45rem" v-for="(items, index) in  store.apartments " :key="index">
                     <div class="card-image-top">
+                        <!-- da sistemare lo storage -->
                         <img :src="`${baseUrl}/storage/${items.cover_img}`" class="img-fluid">
                     </div>
                     <div class="card-body">
-                        <div class="card-title">
-                            <h2>{{ items.title }}</h2>
+                        <h4 class="card-title text-center">{{ items.title }}</h4>
+                        <div class="description-card overflow-auto mt-2">
+                            <p class="card-text py-2 text-start">{{ items.description }}</p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-person-shelter"></i> Numero letti: <strong>{{ items.n_rooms}}</strong></p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-bath"></i> Numero bagni: <strong>{{ items.n_bathrooms }}</strong></p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-bed"></i> Numero letto: <strong>{{ items.n_beds }}</strong></p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-file-medical"></i> Breve descrizione: <strong>{{ items.description }}</strong></p>
+                            <p class="card-text py-2 text-start"><i class="fa-solid fa-ruler-combined"></i> Metri quadri: <strong>{{ items.square_meters}}</strong></p>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -63,5 +70,7 @@
 
 
 <style lang="scss" scoped>
-    
+    .z.z{
+        background-color: red;
+    }
 </style>
