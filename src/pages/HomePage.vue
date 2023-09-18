@@ -22,7 +22,7 @@
                     console.log(store.apartments);
                     // per il loading
                     // if(response.data.success){
-                    //     store.apartments = response.data.resuslt;
+                    //     store.apartments = response.data.resuslts;
                     //     store.loading = false;
                     // }
                 })
