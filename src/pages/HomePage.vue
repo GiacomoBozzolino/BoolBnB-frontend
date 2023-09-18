@@ -6,7 +6,7 @@
 </script>
 
 
-<template lang="">
+<template >
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -37,6 +37,6 @@
 
 
 
-<style lang="">
+<style lang="scss" scoped>
     
 </style>
