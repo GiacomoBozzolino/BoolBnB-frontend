@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomePage from './pages/HomePage.vue';
+import SingleApartment from './pages/SingleApartment.vue';
 
 
 import AboutUs from './pages/AboutUs.vue';
@@ -25,6 +26,12 @@ const router = createRouter({
             path:'/about-us',
             name:'AboutUs',
             component: AboutUs,
+        },
+
+        {
+            path:'/apartment/:slug',
+            name:'SingleApartment',
+            component: SingleApartment,
         },
       
         // {
