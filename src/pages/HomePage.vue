@@ -37,43 +37,41 @@ export default {
   <div class="container">
     <div class="row">
       <div class="col-12 d-flex flex-wrap my-4">
-        <div
-          class="card m-3"
-          style="width: 23rem; height: 45rem"
-          v-for="(items, index) in store.apartments"
-          :key="index"
-        >
+        <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in store.apartments" :key="index">
           <div class="card-image-top">
             <!-- da sistemare lo storage -->
-            <img :src="`${baseUrl}/storage/${items.cover_img}`" class="img-fluid" />
+            <img :src="`${store.apartmensUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
           </div>
           <div class="card-body">
-            <h4 class="card-title text-center">{{ items.title }}</h4>
+            <h4 class="card-title text-center">{{ apartment.title }}</h4>
             <div class="description-card overflow-auto mt-2">
               <p class="card-text py-2 text-start">
                 <i class="fa-solid fa-person-shelter"></i> Numero letti:
-                <strong>{{ items.n_rooms }}</strong>
+                <strong>{{ apartment.n_rooms }}</strong>
               </p>
               <p class="card-text py-2 text-start">
                 <i class="fa-solid fa-bath"></i> Numero bagni:
-                <strong>{{ items.n_bathrooms }}</strong>
+                <strong>{{ apartment.n_bathrooms }}</strong>
               </p>
               <p class="card-text py-2 text-start">
                 <i class="fa-solid fa-bed"></i> Numero letto:
-                <strong>{{ items.n_beds }}</strong>
+                <strong>{{ apartment.n_beds }}</strong>
               </p>
               <p class="card-text py-2 text-start">
                 <i class="fa-solid fa-file-medical"></i> Breve descrizione:
-                <strong>{{ items.description }}</strong>
+                <strong>{{ apartment.description }}</strong>
               </p>
               <p class="card-text py-2 text-start">
                 <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
-                <strong>{{ items.square_meters }}</strong>
+                <strong>{{ apartment.square_meters }}</strong>
               </p>
+              
             </div>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-sm btn-primary"> Leggi il progetto</a>
+
+            <router-link class="btn btn-sm btn-primary" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+
           </div>
         </div>
       </div>
