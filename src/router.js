@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomePage from './pages/HomePage.vue';
+import SingleApartment from './pages/SingleApartment.vue';
 
 
 import AboutUs from './pages/AboutUs.vue';
 
-// import NotFound from './pages/NotFound.vue';
+import NotFound from './pages/NotFound.vue';
 
-// import ThankYou from './pages/ThankYou.vue';
+import ThankYou from './pages/ThankYou.vue';
 
 
 
@@ -26,22 +27,28 @@ const router = createRouter({
             name:'AboutUs',
             component: AboutUs,
         },
-      
-        // {
-        //     path: '/thank-you',
-        //     name: 'thank-you',
-        //     component: ThankYou,
-        // },
 
-        // {
-        //     path:'/pagina-non-trovata',
-        //     name:'not-found',
-        //     component:NotFound
-        // },
-        // {
-        //     path:'/:catchAll(.*)',
-        //     redirect:'/pagina-non-trovata'
-        // }
+        {
+            path:'/apartment/:slug',
+            name:'SingleApartment',
+            component: SingleApartment,
+        },
+      
+        {
+            path: '/thank-you',
+            name: 'thank-you',
+            component: ThankYou,
+        },
+
+        {
+            path:'/pagina-non-trovata',
+            name:'not-found',
+            component:NotFound
+        },
+        {
+            path:'/:catchAll(.*)',
+            redirect:'/pagina-non-trovata'
+        }
     ]
 })
 
