@@ -2,9 +2,14 @@
 // importo stro e aCSios dove si trova la base API
 import { store } from "../store";
 import axios from "axios";
+import AppLoader from '../components/AppLoader.vue';
 
 export default {
   name: "HomePage",
+  components:{
+            AppLoader,
+            
+        },
 
   data() {
     return {
@@ -14,15 +19,14 @@ export default {
 
   methods: {
     getApartments() {
-      // store.loading = true
+      store.loading = true
       axios.get(`${store.apartmensUrl}/api/apartments`).then((response) => {
-        store.apartments = response.data.results;
-        console.log(store.apartments);
+        
         // per il loading
-        // if(response.data.success){
-        //     store.apartments = response.data.resuslts;
-        //     store.loading = false;
-        // }
+        if(response.data.success){
+            store.apartments = response.data.results;
+            store.loading = false;
+        }
       });
     },
   },
@@ -36,7 +40,10 @@ export default {
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12 d-flex flex-wrap my-4">
+      <div class="col-12 d-flex justify-content-center align-items-center py-5" v-if="store.loading">
+                <AppLoader/>
+      </div>
+      <div class="col-12 d-flex flex-wrap my-4" v-else>
         <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in store.apartments" :key="index">
           <div class="card-image-top">
             <!-- da sistemare lo storage -->
@@ -64,14 +71,11 @@ export default {
               <p class="card-text py-2 text-start">
                 <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
                 <strong>{{ apartment.square_meters }}</strong>
-              </p>
-              
+              </p> 
             </div>
           </div>
           <div class="card-footer">
-
             <router-link class="btn btn-sm btn-primary" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
-
           </div>
         </div>
       </div>

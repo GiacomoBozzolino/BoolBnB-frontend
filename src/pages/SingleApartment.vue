@@ -1,6 +1,7 @@
 <script>
     import axios from 'axios';
     import { store } from '../store';
+    import AppLoader from '../components/AppLoader.vue';
 
     export default {
         name:'SingleApartment',
@@ -8,7 +9,8 @@
         data() {
             return {
                 store,
-                apartment:''
+                apartment:'',
+                AppLoader,
             }
         },
 
@@ -24,7 +26,7 @@
                         this.apartment =response.data.apartment
                         store.loading=false
                     }else{
-                        // this.$router.push({name:'not-found'});
+                        this.$router.push({name:'not-found'});
                     }
 
                 });
@@ -38,12 +40,12 @@
 <template lang="">
 
 <div class="container">
-        <!-- <div class="row" v-if="store.loading">
+        <div class="row" v-if="store.loading">
             <div class="col-12 d-flex justify-content-center" >
                 <AppLoader/>
             </div>
-        </div>  -->
-        <div class="row" >
+        </div> 
+        <div class="row" v-else>
             <div class="col-12">
                 <h1 class="text-center"> {{apartment.title}}</h1>
             </div>
@@ -81,6 +83,6 @@
 
 
 
-<style lang="">
+<style lang="scss">
     
 </style>
