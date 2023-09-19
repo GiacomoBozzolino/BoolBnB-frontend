@@ -6,9 +6,9 @@ import SingleApartment from './pages/SingleApartment.vue';
 
 import AboutUs from './pages/AboutUs.vue';
 
-// import NotFound from './pages/NotFound.vue';
+import NotFound from './pages/NotFound.vue';
 
-// import ThankYou from './pages/ThankYou.vue';
+import ThankYou from './pages/ThankYou.vue';
 
 
 
@@ -34,21 +34,21 @@ const router = createRouter({
             component: SingleApartment,
         },
       
-        // {
-        //     path: '/thank-you',
-        //     name: 'thank-you',
-        //     component: ThankYou,
-        // },
+        {
+            path: '/thank-you',
+            name: 'thank-you',
+            component: ThankYou,
+        },
 
-        // {
-        //     path:'/pagina-non-trovata',
-        //     name:'not-found',
-        //     component:NotFound
-        // },
-        // {
-        //     path:'/:catchAll(.*)',
-        //     redirect:'/pagina-non-trovata'
-        // }
+        {
+            path:'/pagina-non-trovata',
+            name:'not-found',
+            component:NotFound
+        },
+        {
+            path:'/:catchAll(.*)',
+            redirect:'/pagina-non-trovata'
+        }
     ]
 })
 
