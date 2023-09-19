@@ -2,15 +2,23 @@
     import axios from 'axios';
     import { store } from '../store';
     import AppLoader from '../components/AppLoader.vue';
+    import ContactForm from '../components/ContactForm.vue';
 
     export default {
         name:'SingleApartment',
+        
+        components:{
+                AppLoader,
+                ContactForm,
+            },
 
         data() {
+            
+
             return {
                 store,
                 apartment:'',
-                AppLoader,
+               
             }
         },
 
@@ -39,13 +47,16 @@
 
 <template lang="">
 
-<div class="container">
-        <div class="row" v-if="store.loading">
+    <div class="container" v-if="store.loading">
+        <div class="row" >
             <div class="col-12 d-flex justify-content-center" >
                 <AppLoader/>
             </div>
         </div> 
-        <div class="row" v-else>
+    </div>
+
+    <div class="container" v-else>
+        <div class="row" >
             <div class="col-12">
                 <h1 class="text-center"> {{apartment.title}}</h1>
             </div>
@@ -74,9 +85,22 @@
                     </span>
                 </li>
             </ul>   
-        </div>   
-    </div>
+        </div>  
 
+             
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-3">
+                <div class="row justify-content-center">
+                    <ContactForm></ContactForm>
+                </div> 
+                
+            </div>
+        </div>
+        
+    </div>
+  
 </template>
 
 

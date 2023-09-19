@@ -1,6 +1,12 @@
 <script>
+ import ContactForm from '../components/ContactForm.vue';
     export default {
-        name: "AboutUs"
+        name: "AboutUs",
+        data() {
+            return {
+                ContactForm,
+            }
+        },
         
     }
 </script>
@@ -14,16 +20,7 @@
             </div>
         </div> 
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 mt-3">
-                <div>
-                    <h1>Chi siamo</h1>
-                </div>
-            </div>
-        </div>
-        
-    </div>
+    
 </template>
 
 
