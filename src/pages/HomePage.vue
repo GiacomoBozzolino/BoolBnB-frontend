@@ -3,13 +3,16 @@
 import { store } from "../store";
 import axios from "axios";
 import AppLoader from '../components/AppLoader.vue';
+import SearchBar from "../components/SearchBar.vue";
+
 
 export default {
   name: "HomePage",
   components:{
-            AppLoader,
+    AppLoader,
+    SearchBar,
             
-        },
+  },
 
   data() {
     return {
@@ -17,11 +20,27 @@ export default {
     };
   },
 
+  computed:{
+    //FUNZIONE FILTRAGGIO <-------FUNZIONA
+    filteredApartments() {
+      return store.apartments.filter((apartments) => {
+        const query = store.searchApartments.toLowerCase();
+        console.log(query);
+        // Esegui una ricerca per nome, città o numero di stanze
+        return (
+          apartments.title.toLowerCase().includes(query)
+        );
+
+      });
+    },
+  },
+
   methods: {
     getApartments() {
       store.loading = true
-      axios.get(`${store.apartmensUrl}/api/apartments`).then((response) => {
-        
+      axios.get(`${store.apartmentsUrl}/api/apartments`).then((response) => {
+        store.apartments = response.data.results;
+        console.log(store.apartments);
         // per il loading
         if(response.data.success){
             store.apartments = response.data.results;
@@ -29,6 +48,10 @@ export default {
         }
       });
     },
+
+    filteredApartments(){
+      
+    }
   },
 
   created() {
@@ -40,14 +63,15 @@ export default {
 <template>
   <div class="container">
     <div class="row">
+      <SearchBar @apartmentSearch="filteredApartments"/>
       <div class="col-12 d-flex justify-content-center align-items-center py-5" v-if="store.loading">
-                <AppLoader/>
+        <AppLoader/>
       </div>
       <div class="col-12 d-flex flex-wrap my-4" v-else>
-        <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in store.apartments" :key="index">
+        <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in filteredApartments" :key="index">
           <div class="card-image-top">
             <!-- da sistemare lo storage -->
-            <img :src="`${store.apartmensUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
+            <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
           </div>
           <div class="card-body">
             <h4 class="card-title text-center">{{ apartment.title }}</h4>
