@@ -3,6 +3,7 @@
     import { store } from '../store';
     import AppLoader from '../components/AppLoader.vue';
     import ContactForm from '../components/ContactForm.vue';
+    import MapApartament from '../components/MapApartament.vue';
 
     export default {
         name:'SingleApartment',
@@ -10,6 +11,7 @@
         components:{
                 AppLoader,
                 ContactForm,
+                MapApartament,
             },
 
         data() {
@@ -93,7 +95,9 @@
         <div class="row">
             <div class="col-12 mt-3">
                 <div class="row justify-content-center">
+                    <MapApartament></MapApartament>
                     <ContactForm></ContactForm>
+                    
                 </div> 
                 
             </div>

@@ -2,6 +2,9 @@
  import ContactForm from '../components/ContactForm.vue';
     export default {
         name: "AboutUs",
+        components:{
+            ContactForm,
+        },
         data() {
             return {
                 ContactForm,
@@ -42,6 +45,7 @@
             </div>
             
         </div> 
+        <ContactForm></ContactForm>
     </div>
     
 </template>
