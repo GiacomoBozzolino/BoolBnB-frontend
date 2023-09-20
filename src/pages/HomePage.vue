@@ -2,9 +2,15 @@
 // importo stro e aCSios dove si trova la base API
 import { store } from "../store";
 import axios from "axios";
+import SearchBar from "../components/SearchBar.vue";
+
 
 export default {
   name: "HomePage",
+
+  components :{
+    SearchBar,
+  },
 
   data() {
     return {
@@ -15,12 +21,12 @@ export default {
   computed:{
     //FUNZIONE FILTRAGGIO <-------FUNZIONA
     filteredApartments() {
-      return store.apartments.filter((apartment) => {
+      return store.apartments.filter((apartments) => {
         const query = store.searchApartments.toLowerCase();
         console.log(query);
         // Esegui una ricerca per nome, città o numero di stanze
         return (
-          apartment.title.toLowerCase().includes(query)
+          apartments.title.toLowerCase().includes(query)
         );
 
       });
@@ -54,11 +60,12 @@ export default {
 <template>
   <div class="container">
     <div class="row">
+    <SearchBar @apartmentSearch="filteredApartments"/>
       <div class="col-12 d-flex flex-wrap my-4">
         <div
           class="card m-3"
           style="width: 23rem; height: 45rem"
-          v-for="(items, index) in store.apartments"
+          v-for="(items, index) in filteredApartments"
           :key="index"
         >
           <div class="card-image-top">

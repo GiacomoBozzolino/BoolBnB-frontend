@@ -8,7 +8,6 @@
     import HomePage from './pages/HomePage.vue';
     import AppHeader from './components/AppHeader.vue';
     import AppFooter from './components/AppFooter.vue';
-    import SearchBar from "./components/SearchBar.vue";
 
 
     export default{
@@ -16,7 +15,6 @@
         HomePage,
         AppHeader,
         AppFooter,
-        SearchBar,
       },
     data() {
     return {
