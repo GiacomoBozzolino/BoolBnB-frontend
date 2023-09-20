@@ -38,8 +38,10 @@
                     }else{
                         this.$router.push({name:'not-found'});
                     }
-
+                    
                 });
+                
+
             }
         },
     }
@@ -57,40 +59,7 @@
         </div> 
     </div>
 
-    <!-- <div class="container" v-else>
-        <div class="row" >
-            <div class="col-12">
-                <h1 class="text-center"> {{apartment.title}}</h1>
-            </div>
-            <div class= "d-flex justify-content-center">
-                <img :src="`${store.apartmensUrl}/storage/${apartment.cover_img}`" class="img-fluid w-50 " :alt="apartment.title"/>
-            </div>
-            <ul>
-                <li>
-                    <p>
-                        {{apartment.description}}
-                    </p>
-                </li>
-                <li>
-                    numero di stanze: {{apartment.n_rooms}}
-                </li>
-                <li>
-                    Stanze da letto: {{apartment.n_beds}}
-                </li>
-                <li>
-                    Bagni: {{apartment.n_beds}}
-                </li>
-                
-                <li>
-                    <span class="badge text-bg-primary text-decoration-none mx-2" v-for='item in apartment.services' :key='item.id'>
-                        {{item.type}}
-                    </span>
-                </li>
-            </ul>   
-        </div>  
-
-             
-    </div> -->
+    
     <div class='container py-3' v-else>
 
         <div class='row'>
@@ -99,7 +68,7 @@
             </div>
             <div class="col-6">
                 <ul>
-                    <li class='pb-3'><h2>{{apartment.title}}</h2></li>
+                    <li class='pb-3'><h2>{{ apartment.title}}</h2></li>
                     <li><strong>Numero letti:</strong> {{apartment.n_beds}}</li>
                     <li><strong>Numero stanze:</strong> {{apartment.n_rooms}}</li>
                     <li><strong>Numero bagni:</strong> {{apartment.n_bathrooms}}</li>
@@ -137,7 +106,7 @@
 
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .col-6{
 
 
