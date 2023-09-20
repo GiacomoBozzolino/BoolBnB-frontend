@@ -19,7 +19,7 @@ export default {
     },
     methods: {
        viewMap(){
-
+            // chiamata api degli appartamenti
             axios.get(`${store.apartmensUrl}/api/apartments/${this.$route.params.slug}`).then((response) =>{
                 if(response.data.success){
                     this.apartment =response.data.apartment
@@ -31,30 +31,20 @@ export default {
 
 
                 
-                // var speedyPizzaCoordinates = [this.apartment.latitude, this.apartament.longitude]
+                // funzione introduzione mappa prendendo la latitudine e la longitudine dalla chiamata api degli appartamenti
                 let long = this.apartment.longitude
                 let latitude = this.apartment.latitude
                 let map = tt.map({
                     container: "map",
                     key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
                     center: [long, latitude],
-                    zoom:13
+                    zoom:15
                 })
                 var marker = new tt.Marker().setLngLat([long, latitude]).addTo(map)
                 
                 
             });
         
-
-
-        // var speedyPizzaCoordinates = [-121.91595, 37.36729]
-        // let map = tt.map({
-        //     container: "map",
-        //     key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
-        //     center: speedyPizzaCoordinates,
-        //     zoom:13
-        // })
-        // var marker = new tt.Marker().setLngLat(speedyPizzaCoordinates).addTo(map)
         }
     },
 
@@ -72,7 +62,7 @@ export default {
 <style lang="scss">
 #map{
     height: 500px;
-    width: 500px;
+    width: 100%;
         
 }
 

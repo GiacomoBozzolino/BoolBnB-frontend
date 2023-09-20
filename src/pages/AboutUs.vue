@@ -35,7 +35,7 @@
     <div class="container pb-5">
         <div class="row">
             <div class="col-4 ps-3">
-                <img class="rounded-circle" width="400px" height="300px" src="https://i.pinimg.com/originals/98/7a/e9/987ae9c01022ce5a1d9f468d67f2a14d.jpg" alt="">
+                <img class="rounded-circle" width="400px" height="300px" src="https://picsum.photos/id/870/200/300?grayscale&blur=2" alt="">
             </div>
             <div class="col-8">
                
