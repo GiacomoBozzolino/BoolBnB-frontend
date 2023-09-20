@@ -21,7 +21,7 @@ export default {
         // Esegui una ricerca per nome, città o numero di stanze
         return (
           apartment.title.toLowerCase().includes(query)
-          );
+        );
 
       });
     },
@@ -30,9 +30,8 @@ export default {
   methods: {
     getApartments() {
       // store.loading = true
-      axios.get(`${store.apartmensUrl}/api/apartments`).then((response) => {
+      axios.get(`${store.apartmentsUrl}/api/apartments`).then((response) => {
         store.apartments = response.data.results;
-        console.log(store.apartments);
         // per il loading
         // if(response.data.success){
         //     store.apartments = response.data.resuslts;
@@ -64,13 +63,13 @@ export default {
         >
           <div class="card-image-top">
             <!-- da sistemare lo storage -->
-            <img :src="`${baseUrl}/storage/${items.cover_img}`" class="img-fluid" />
+            <img :src="`${store.apartmentsUrl}/storage/${items.cover_img}`" class="img-fluid" />
           </div>
           <div class="card-body">
             <h4 class="card-title text-center">{{ items.title }}</h4>
             <div class="description-card overflow-auto mt-2">
               <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-person-shelter"></i> Numero letti:
+                <i class="fa-solid fa-person-shelter"></i> Numero stanze:
                 <strong>{{ items.n_rooms }}</strong>
               </p>
               <p class="card-text py-2 text-start">
