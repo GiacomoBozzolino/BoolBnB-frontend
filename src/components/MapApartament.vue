@@ -1,13 +1,17 @@
 
 <!-- JAVASCRIPT & VUE.JS -->
+
 <script>
+import axios from 'axios';
+import { store } from '../store';
 export default {
 
     name:'MapApartament',
 
+
     data() {
         return {
-            
+            apartment:'',
         }
     },
     mounted() {
@@ -15,15 +19,43 @@ export default {
     },
     methods: {
        viewMap(){
-        var speedyPizzaCoordinates = [-121.91595, 37.36729]
-        let map = tt.map({
-            container: "map",
-            key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
-            center: speedyPizzaCoordinates,
-            zoom:13
-        })
-        var marker = new tt.Marker().setLngLat(speedyPizzaCoordinates).addTo(map)
-       }
+
+            axios.get(`${store.apartmensUrl}/api/apartments/${this.$route.params.slug}`).then((response) =>{
+                if(response.data.success){
+                    this.apartment =response.data.apartment
+                    store.loading=false
+                }else{
+                    this.$router.push({name:'not-found'});
+                }
+                console.log(this.apartment.latitude)
+
+
+                
+                // var speedyPizzaCoordinates = [this.apartment.latitude, this.apartament.longitude]
+                let long = this.apartment.longitude
+                let latitude = this.apartment.latitude
+                let map = tt.map({
+                    container: "map",
+                    key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
+                    center: [long, latitude],
+                    zoom:13
+                })
+                var marker = new tt.Marker().setLngLat([long, latitude]).addTo(map)
+                
+                
+            });
+        
+
+
+        // var speedyPizzaCoordinates = [-121.91595, 37.36729]
+        // let map = tt.map({
+        //     container: "map",
+        //     key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
+        //     center: speedyPizzaCoordinates,
+        //     zoom:13
+        // })
+        // var marker = new tt.Marker().setLngLat(speedyPizzaCoordinates).addTo(map)
+        }
     },
 
     
