@@ -26,18 +26,18 @@
   },
 
   methods: {
-    getApartment() {
-      // CONTROLLO CHE L'UTENTE ABBIA INSERITO UNA STRINGA NELLA SEARCH-BAR
-      if (store.userSearch !== '') {
-        // CREO L'URL PER LA CHIAMATA API APARTMENT CON IL FILTRAGGIO RICHIESTO DALL'UTENTE
-        const apartmentUrl = `${store.apartmensUrl}?api_key=${store.apiKey}&query=${store.userSearch}`;
-        // EFFETTUO LA CHIAMATA API PER OTTENERE I FILM RICERCATI DALL'UTENTE
-        axios.get(apartmensUrl).then((result) => {
-          // INSERISCO DENTRO L'ARRAY APARTMENTS GLI OGGETTI OTTENUTI DALLA CHIAMATA API
-          store.apartments = result.data.results;
-        })
-      }
-    }
+    // getApartment() {
+    //   // CONTROLLO CHE L'UTENTE ABBIA INSERITO UNA STRINGA NELLA SEARCH-BAR
+    //   if (store.userSearch !== '') {
+    //     // CREO L'URL PER LA CHIAMATA API APARTMENT CON IL FILTRAGGIO RICHIESTO DALL'UTENTE
+    //     const apartmentUrl = `${store.apartmensUrl}?api_key=${store.apiKey}&query=${store.userSearch}`;
+    //     // EFFETTUO LA CHIAMATA API PER OTTENERE I FILM RICERCATI DALL'UTENTE
+    //     axios.get(apartmensUrl).then((result) => {
+    //       // INSERISCO DENTRO L'ARRAY APARTMENTS GLI OGGETTI OTTENUTI DALLA CHIAMATA API
+    //       store.apartments = result.data.results;
+    //     })
+    //   }
+    // }
   }
 }
 

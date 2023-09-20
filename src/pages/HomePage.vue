@@ -12,6 +12,21 @@ export default {
     };
   },
 
+  computed:{
+    //FUNZIONE FILTRAGGIO <-------FUNZIONA
+    filteredApartments() {
+      return store.apartments.filter((apartment) => {
+        const query = store.searchApartments.toLowerCase();
+        console.log(query);
+        // Esegui una ricerca per nome, città o numero di stanze
+        return (
+          apartment.title.toLowerCase().includes(query)
+          );
+
+      });
+    },
+  },
+
   methods: {
     getApartments() {
       // store.loading = true
@@ -25,6 +40,10 @@ export default {
         // }
       });
     },
+
+    filteredApartments(){
+      
+    }
   },
 
   created() {
