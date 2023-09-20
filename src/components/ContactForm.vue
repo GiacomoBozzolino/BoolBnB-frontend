@@ -36,7 +36,7 @@ export default {
             this.errors = {};
 
             // EFFETTUIAMO LA CHIAMATA AXIOS IN POST
-            axios.post(`${this.store.apartmensUrl}/api/contacts`, form_data).then((response) => {
+            axios.post(`${this.store.apartmentsUrl}/api/contacts`, form_data).then((response) => {
 
                 if (response.data.success) {
                     // RIPULISCO I DATI DI INPUT
