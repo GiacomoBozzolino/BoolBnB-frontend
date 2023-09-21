@@ -31,7 +31,7 @@
         methods: {
             getSingleApartment(){
                 store.loading=true
-                axios.get(`${store.apartmensUrl}/api/apartments/${this.$route.params.slug}`).then((response) =>{
+                axios.get(`${store.apartmentsUrl}/api/apartments/${this.$route.params.slug}`).then((response) =>{
                     if(response.data.success){
                         this.apartment =response.data.apartment
                         store.loading=false
@@ -64,7 +64,7 @@
 
         <div class='row'>
             <div class="col-6">
-                <img :src="`${store.apartmensUrl}/storage/${apartment.cover_img}`" class="img-fluid " :alt="apartment.title"/>
+                <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid " :alt="apartment.title"/>
             </div>
             <div class="col-6">
                 <ul>

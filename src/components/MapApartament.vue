@@ -20,7 +20,7 @@ export default {
     methods: {
        viewMap(){
             // chiamata api degli appartamenti
-            axios.get(`${store.apartmensUrl}/api/apartments/${this.$route.params.slug}`).then((response) =>{
+            axios.get(`${store.apartmentsUrl}/api/apartments/${this.$route.params.slug}`).then((response) =>{
                 if(response.data.success){
                     this.apartment =response.data.apartment
                     store.loading=false
