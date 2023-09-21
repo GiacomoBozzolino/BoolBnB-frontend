@@ -16,7 +16,6 @@
 
         data() {
             
-
             return {
                 store,
                 apartment:'',
@@ -73,6 +72,7 @@
                     <li><strong>Numero stanze:</strong> {{apartment.n_rooms}}</li>
                     <li><strong>Numero bagni:</strong> {{apartment.n_bathrooms}}</li>
                     <li><strong>Indirizzo:</strong> {{apartment.address}}</li>
+                    
                     <li><strong>Dimensione dell'appartamento:</strong> {{apartment.square_meters}} metri quadrati</li>
                     <li>
                         <strong>Servizi:</strong>
@@ -91,8 +91,7 @@
             <div class="col-12 mt-3">
                 <div class="row justify-content-center">
                     <MapApartament></MapApartament>
-                    <ContactForm></ContactForm>
-                    
+                    <ContactForm :apartment="apartment"/>
                 </div> 
                 
             </div>
