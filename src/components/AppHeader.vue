@@ -14,8 +14,7 @@ export default {
                     label: 'Chi siamo',
                     routeName: 'AboutUs'
                 },
-
-
+     
 
             ]
         }
@@ -53,6 +52,9 @@ export default {
                                 <router-link class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5" :to="{ name: item.routeName }">
                                     {{ item.label }}
                                 </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <a href="http://127.0.0.1:8000/" class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5" >Diventa Host</a>
                             </li>
                         </ul>
                     </div>
