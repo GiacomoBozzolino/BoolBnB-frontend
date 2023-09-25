@@ -19,7 +19,24 @@ data() {
       searchCity: '',
       suggestions: [],
       store,
-    };
+    }
+
+  },
+
+
+  computed:{
+    //FUNZIONE FILTRAGGIO <-------FUNZIONA
+    filteredApartments() {
+      return store.apartments.filter((apartments) => {
+        const query = store.searchApartments.toLowerCase();
+        // console.log(query);
+        // Esegui una ricerca per nome, città o numero di stanze
+        return (
+          apartments.title.toLowerCase().includes(query)
+        );
+
+      });
+    },
   },
 
 
@@ -29,7 +46,6 @@ data() {
     async searchSuggestions() {
       if (this.searchCity !== '') {
           const response = await axios.get(`https://api.tomtom.com/search/2/search/${this.searchCity}.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`, {
-            
           });
 
           this.suggestions = response.data.results;
@@ -42,7 +58,6 @@ data() {
 // FUNZIONE DI RICERCA INDIRIZZO NEL DB
     async searchApartment(city) {
       if (this.searchCity !== '') {
-        
           const response = await axios.get(`http://localhost:8000/api/search`, {
             params: {
               city: city,
@@ -79,7 +94,7 @@ data() {
         <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in filteredApartments" :key="index">
           <div class="card-image-top">
             <!-- da sistemare lo storage -->
-            <!-- <img :src="${store.apartmentsUrl}/storage/${apartment.cover_img}" class="img-fluid" /> -->
+            <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
           </div>
           <div class="card-body">
             <h4 class="card-title text-center">{{ apartment.title }}</h4>
