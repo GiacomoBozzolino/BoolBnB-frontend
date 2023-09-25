@@ -113,4 +113,9 @@ export default {
 .suggestions li:hover {
   background-color: #f0f0f0;
 }
+
+
+.btn:disabled{
+  background-color: gray;
+}
 </style>
