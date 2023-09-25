@@ -44,7 +44,7 @@
 </script>
 
 <template>
-
+  
   <div class="margin-top">
     <AppHeader/>
     <search-bar></search-bar>
