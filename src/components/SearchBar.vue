@@ -1,65 +1,69 @@
-<template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-6 d-flex justify-content-end align-items-center">
-        <div class="input-group">
-          <input type="search" class="form-control rounded" v-model="store.searchApartments" name="apartment-search" id="autocomplete-address" placeholder="Inserisci il tuo indirizzo" @input="getAddressResults" required>
-          <div class="input-group-append">
-            <button class="btn btn-warning" type="button" @click="performApartmentSearch">Cerca</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="address-results">
-      <div v-for="result in resultsContainer" :key="result.id" class="address-result-item" @click="selectAddress(result)">
-        {{ result.address.freeformAddress }}
-      </div>
-    </div>
-  </div>
-</template>
-
-<script setup>
-import { ref } from 'vue';
-import axios from 'axios';
-
-const apiKey = 'zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p';
-const resultsContainer = ref([]);
-
-function getAddressResults() {
-  let searchValue = document.getElementById('autocomplete-address').value;
-
-  axios.get(`https://api.tomtom.com/search/2/search/${searchValue}.json?key=${apiKey}&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`)
-    .then(response => {
-      resultsContainer.value = response.data.results || [];
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-}
-
-function selectAddress(result) {
-  store.searchApartments = result.address.freeformAddress;
-  resultsContainer.value = [];
-  document.activeElement.blur();
-}
-</script>
 
 <script>
-import { store } from "../store";
+import axios from 'axios';
+import { store } from '../store';
 
 export default {
+
   data() {
     return {
       store,
     };
   },
+
   methods: {
-    performApartmentSearch() {
-      // Add your logic for apartment search here
-    }
-  }
-};
+    async searchApartment(city) {
+            try {
+                const response = await axios.get(`http://localhost:8000/api/search`, {
+                params: {
+                    city: city,
+                },
+                });
+                console.log(response)
+                // Chiamata alla mutazione per salvare i risultati nello store
+                store.apartments = response.data;
+                store.city = city,
+                console.log(store.apartments),
+
+                // Reindirizzamento
+                this.$router.push({ name: 'Home' });
+            } catch (error) {
+                console.error('Errore durante la ricerca:', error);
+            }
+    
+  },
+}
+
+}
 </script>
+
+
+
+
+<template>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 d-flex justify-content-end align-items-center">
+        <form @submit.prevent="searchApartment($event.target.city.value)">
+            <div class="form-floating mb-3 col-5 col-lg-8 mx-auto ms-lg-0">
+                <input type="text" class="form-control text-dark" id="city" placeholder="Roma" name="city">
+                <label name="city" class="text-dark" for="floatingInput">Città</label>
+            </div>
+            <!-- bottone cerca -->
+            <div class="d-flex d-lg-block justify-content-center py-2 py-lg-0">
+                <input type="submit" value="Cerca" class="mx-md-auto btn btn-lg my_btn">
+            </div>
+        </form>
+      </div>
+    </div>
+    
+  </div>
+</template>
+
+
+
+
+
 
 <style scoped>
 .address-result-item {
