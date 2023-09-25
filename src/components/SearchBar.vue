@@ -54,37 +54,33 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-6 d-flex justify-content-end align-items-center">
-        <form @submit.prevent="searchApartment(searchCity)" autocomplete="off">
-          <div class="form-floating mb-3 col-5 col-lg-8 mx-auto ms-lg-0">
-            <input
-              type="text"
-              class="form-control text-dark"
-              id="city"
-              placeholder="Roma"
-              v-model="searchCity"
-              @input="searchSuggestions"
-            >
-            <label class="text-dark" for="city">Città</label>
-          </div>
-          <!-- Suggerimenti -->
-          <div v-if="suggestions.length > 0" class="suggestions">
-            <ul>
-              <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)">
-                {{ suggestion.address.freeformAddress }}
-              </li>
-            </ul>
-          </div>
-          <!-- Bottone Cerca -->
-          <div class="d-flex d-lg-block justify-content-center py-2 py-lg-0">
-            <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
-          </div>
-
-        </form>
+  <div>
+    <form @submit.prevent="searchApartment(searchCity)" autocomplete="off">
+      <div class="form-floating mb-3 col-5 col-lg-8 mx-auto ms-lg-0">
+        <input
+          type="text"
+          class="form-control text-dark"
+          id="city"
+          placeholder="Roma"
+          v-model="searchCity"
+          @input="searchSuggestions"
+        >
+        <label class="text-dark" for="city">Città</label>
       </div>
-    </div>
+      <!-- Suggerimenti -->
+      <div v-if="suggestions.length > 0" class="suggestions">
+        <ul>
+          <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)">
+            {{ suggestion.address.freeformAddress }}
+          </li>
+        </ul>
+      </div>
+      <!-- Bottone Cerca -->
+      <div class="d-flex d-lg-block justify-content-center py-2 py-lg-0">
+        <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
+      </div>
+
+    </form>
   </div>
 </template>
 
