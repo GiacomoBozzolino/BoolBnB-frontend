@@ -14,7 +14,7 @@ export default {
     // FUNZIONE RICERCA SUGGERIMENTI
     async searchSuggestions() {
       if (this.searchCity !== '') {
-          const response = await axios.get(`https://api.tomtom.com/search/2/search/${this.searchCity}.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&typeahead=true`, {
+          const response = await axios.get(`https://api.tomtom.com/search/2/search/${this.searchCity}.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`, {
             
           });
 
@@ -38,7 +38,7 @@ export default {
           store.apartments = response.data;
           store.city = city;
 
-          this.$router.push({ name: 'Home' });
+          this.$router.push({ name: 'AdvancedSearch' });
         } 
        
     },
@@ -76,9 +76,7 @@ export default {
         </ul>
       </div>
       <!-- Bottone Cerca -->
-      <div class="d-flex d-lg-block justify-content-center py-2 py-lg-0">
-        <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
-      </div>
+      <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
 
     </form>
   </div>

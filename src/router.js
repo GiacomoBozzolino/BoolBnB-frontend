@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomePage from './pages/HomePage.vue';
-import SingleApartment from './pages/SingleApartment.vue';
 
+import AdvancedSearch from './pages/AdvancedSearch.vue';
+
+import SingleApartment from './pages/SingleApartment.vue';
 
 import AboutUs from './pages/AboutUs.vue';
 
@@ -16,11 +18,16 @@ const router = createRouter({
     history:createWebHistory(),
     routes:[
         {
-            path:'/',
+            path:'/home',
             name:'Home',
             component: HomePage,
         },
-    
+
+        {
+            path:'/advanced-search',
+            name:'AdvancedSearch',
+            component: AdvancedSearch,
+        },
       
         {
             path:'/about-us',
