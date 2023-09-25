@@ -9,6 +9,7 @@ export const store = reactive({
     apartments: [],
     // dati per il search
     searchApartments: '',
+    city: "",
     apartmentsSearch: [],
     // extras
     loading: true,
