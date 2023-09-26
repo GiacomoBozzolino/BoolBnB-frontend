@@ -79,6 +79,16 @@ export default {
       this.suggestions = [];
       console.log(this.searchCity)
     },
+    getServices() {
+        axios.get(`${store.apartmentsUrl}/api/services`).then((response) => {
+          this.services = response.data.results;
+          console.log(this.services)
+        });
+      },
+  },
+
+  created() {
+    this.getServices();
   },
 };
 </script>
@@ -134,6 +144,7 @@ export default {
               <input type="number" class="form-control" v-model="n_beds" id="n_beds" name="n_beds" min="1" max="15">
             </div>
           </div>
+          <!-- DA AGGIUNGERE I SERVIZI -->
 
           <!-- Bottone Cerca -->
           <div class="d-flex align-items-center justify-content-center mt-2">
