@@ -52,6 +52,14 @@ data() {
           });
 
           this.suggestions = response.data.results;
+
+          this.button = document.querySelector('.btn')
+
+          if (this.suggestions == 0) {
+            this.button.disabled = true
+          }else{
+            this.button.disabled = false
+          }
         } 
        else {
         this.suggestions = [];
@@ -177,7 +185,7 @@ data() {
             </div>
           </div>
           <div class="card-footer">
-            <router-link class="btn btn-sm btn-primary" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+            <router-link class="btn s btn-sm btn-primary" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
           </div>
         </div>
       </div>    
