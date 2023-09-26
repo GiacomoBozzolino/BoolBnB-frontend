@@ -79,7 +79,7 @@ export default {
                 <strong>{{ apartment.address }}</strong>
               </p> 
               <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-person-shelter"></i> Numero letti:
+                <i class="fa-solid fa-person-shelter"></i> Numero stanze:
                 <strong>{{ apartment.n_rooms }}</strong>
               </p>
               <p class="card-text py-2 text-start">
@@ -87,7 +87,7 @@ export default {
                 <strong>{{ apartment.n_bathrooms }}</strong>
               </p>
               <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-bed"></i> Numero letto:
+                <i class="fa-solid fa-bed"></i> Numero letti:
                 <strong>{{ apartment.n_beds }}</strong>
               </p>
               <p class="card-text py-2 text-start">

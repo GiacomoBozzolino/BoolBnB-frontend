@@ -54,31 +54,34 @@ export default {
 </script>
 
 <template>
-  <div>
-    <form @submit.prevent="searchApartment(searchCity)" autocomplete="off">
-      <div class="form-floating mb-3 col-5 col-lg-8 mx-auto ms-lg-0">
-        <input
-          type="text"
-          class="form-control text-dark"
-          id="city"
-          placeholder="Roma"
-          v-model="searchCity"
-          @input="searchSuggestions"
-        >
-        <label class="text-dark" for="city">Città</label>
+  <div class="input-group">
+    <form @submit.prevent="searchApartment(searchCity)" autocomplete="off" class="d-flex">
+      <div>
+        <div class="form-group">
+          
+          <input
+            type="text"
+            class="form-control text-dark"
+            id="city"
+            placeholder="Cerca"
+            v-model="searchCity"
+            @input="searchSuggestions"
+          >
+        </div>
+        <!-- Suggerimenti -->
+        <div v-if="suggestions.length > 0" class="suggestions">
+          <ul>
+            <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)">
+              {{ suggestion.address.freeformAddress }}
+            </li>
+          </ul>
+        </div>
       </div>
-      <!-- Suggerimenti -->
-      <div v-if="suggestions.length > 0" class="suggestions">
-        <ul>
-          <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)">
-            {{ suggestion.address.freeformAddress }}
-          </li>
-        </ul>
-      </div>
-      <!-- Bottone Cerca -->
-      <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
-
+        <div class="form-group px-2 ">
+          <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
+        </div>
     </form>
+      <!-- Bottone Cerca -->
   </div>
 </template>
 

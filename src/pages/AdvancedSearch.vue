@@ -19,6 +19,9 @@ data() {
       searchCity: '',
       suggestions: [],
       store,
+      n_rooms:'',
+      n_beds:'',
+      distance:'',
     }
 
   },
@@ -56,11 +59,14 @@ data() {
     },
 
 // FUNZIONE DI RICERCA INDIRIZZO NEL DB
-    async searchApartment(city) {
+    async searchAdvancedApartment(city) {
       if (this.searchCity !== '') {
-          const response = await axios.get(`http://localhost:8000/api/search`, {
+          const response = await axios.get(`http://localhost:8000/api/searchAdvanced`, {
             params: {
               city: city,
+              n_rooms:this.n_rooms,
+              n_beds:this.n_beds,
+              distance:this.distance,
             },
           });
 
@@ -87,9 +93,68 @@ data() {
   <div class="container">
     <div class="row">
         <h1>PAGINA RICERCA AVANZATA</h1>
-        <div class="col-12 col-md-6 mx-auto d-flex justify-content-center align-items-center">
-            <SearchBar @apartmentsSearch="filteredApartments"/>
+        <div>
+    <form @submit.prevent="searchAdvancedApartment(searchCity)" autocomplete="off">
+      <div class="form-floating mb-3 col-5 col-lg-8 mx-auto ms-lg-0">
+        <input
+          type="text"
+          class="form-control text-dark"
+          id="city"
+          placeholder="Roma"
+          v-model="searchCity"
+          @input="searchSuggestions"
+        >
+        <label class="text-dark" for="city">Città</label>
+      </div>
+      <!-- Suggerimenti -->
+      <div v-if="suggestions.length > 0" class="suggestions">
+        <ul>
+          <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)">
+            {{ suggestion.address.freeformAddress }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-11 p-2">
+            <label for="distance" class="form-label">Imposta raggio di ricerca</label>
+            <input type="text" class="form-control" v-model="distance" id="distance" name="n_rooms"
+            min="1" max="50">
+            
+      </div>
+      <div class="d-flex">
+        <div class="col-6 p-2">
+            <label for="n_rooms" class="form-label">Numero Stanze <font-awesome-icon :icon="['fas', 'house']" /></label>
+            <input type="number" class="form-control" v-model="n_rooms" id="n_rooms" name="n_rooms"
+            min="1" max="15">
         </div>
+        <div class="col-6 p-2">
+            <label for="n_beds" class="form-label">Numero Letti <font-awesome-icon :icon="['fas', 'house']" /></label>
+            <input type="number" class="form-control" v-model="n_beds" id="n_beds" name="n_beds"
+            min="1" max="15">
+        </div>
+      </div>
+      
+
+      <!-- Bottone Cerca -->
+      <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
+
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="col-12 d-flex flex-wrap my-4">
         <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in filteredApartments" :key="index">
           <div class="card-image-top">

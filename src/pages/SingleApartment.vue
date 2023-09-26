@@ -68,8 +68,8 @@
             <div class="col-6">
                 <ul>
                     <li class='pb-3'><h2>{{ apartment.title}}</h2></li>
-                    <li><strong>Numero letti:</strong> {{apartment.n_beds}}</li>
                     <li><strong>Numero stanze:</strong> {{apartment.n_rooms}}</li>
+                    <li><strong>Numero letti:</strong> {{apartment.n_beds}}</li>
                     <li><strong>Numero bagni:</strong> {{apartment.n_bathrooms}}</li>
                     <li><strong>Indirizzo:</strong> {{apartment.address}}</li>
                     
