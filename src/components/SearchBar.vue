@@ -19,6 +19,15 @@ export default {
           });
 
           this.suggestions = response.data.results;
+
+
+          this.button = document.querySelector('.s')
+
+          if (this.suggestions == 0) {
+            this.button.disabled = true
+          }else{
+            this.button.disabled = false
+          }
         } 
        else {
         this.suggestions = [];
@@ -38,7 +47,11 @@ export default {
           store.apartments = response.data;
           store.city = city;
 
+          console.log(store.apartments)
+
           this.$router.push({ name: 'AdvancedSearch' });
+
+          
         } 
        
     },
@@ -78,7 +91,7 @@ export default {
         </div>
       </div>
         <div class="form-group px-2 ">
-          <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
+          <button type="submit" class="btn s btn-primary"  >Cerca</button>
         </div>
     </form>
       <!-- Bottone Cerca -->
