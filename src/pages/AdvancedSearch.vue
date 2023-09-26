@@ -24,8 +24,8 @@ export default {
       suggestions: [],
       store,
       // SERVIZI
-      selectedServices: [],
       services: [],
+      selectedServices: [],
 
     }
   },
@@ -64,7 +64,6 @@ export default {
             n_rooms: this.n_rooms,
             n_beds: this.n_beds,
             distance: this.distance,
-            // prima che si fermasse tom tom ho aggiunto questo 
             services: this.selectedServices,
           },
         });
@@ -107,8 +106,9 @@ export default {
     <div class="row">
       <!-- FORM CONTAINER -->
       <div class="form-container sidebar col-2 border-end border-3 bg-color-search ">
-        <h2 class="px-2 pt-2">Ricerca avanzata</h2>
-        <hr class="m-0 mb-3">
+        <div class="border rounded-5 text-center my-3 shadow bg-light-subtle">
+          <h3 class="px-2 pt-2">Ricerca avanzata</h3>
+        </div>
         <form @submit.prevent="searchAdvancedApartment(searchCity)" autocomplete="off">
           <!-- SEARCH CONTAINER -->
           <div class="serach-container p-2">
