@@ -24,7 +24,7 @@ const router = createRouter({
         },
 
         {
-            path: '/advanced-search/:searchCity?/:distance?/:n_rooms?/:n_beds?',
+            path: '/advanced-search/:searchCity?/:distance?/:n_rooms?/:n_beds?/:services?',
             name: 'AdvancedSearch',
             component: AdvancedSearch,
         },

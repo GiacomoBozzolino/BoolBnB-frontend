@@ -77,6 +77,7 @@ export default {
             distance: `${this.distance}`,
             n_rooms: `${this.n_rooms}`,
             n_beds: `${this.n_beds}`,
+            services: `${this.selectedServices}`,
           }
         });
       }
@@ -156,7 +157,7 @@ export default {
           <div class="p-2">
             <div class="form-check" v-for="(service, index) in this.services" :key="index + 1">
               <input type="checkbox" class="form-check-input" name="selectedServices" :id="'service' + service.id" v-model="selectedServices" :value="service.id">
-              <!-- <span class="mx-2" v-html="service.icon"></span> -->
+              <span class="mx-2" v-html="service.icon"></span>
               <label :for="'service' + service.id" class="form-check-label">{{ service.type }}</label>
             </div>
           </div>
