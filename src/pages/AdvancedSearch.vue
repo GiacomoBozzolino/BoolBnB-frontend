@@ -16,12 +16,12 @@ export default {
 
 data() {
     return {
-      searchCity: store.searchCity,
+      searchCity: store.searchCity || '',
+      n_rooms: this.$route.params.n_rooms || '',
+      n_beds: this.$route.params.n_beds || '',
+      distance: this.$route.params.distance || '',
       suggestions: [],
       store,
-      n_rooms:'',
-      n_beds:'',
-      distance:'',
     }
 
   },
@@ -73,7 +73,13 @@ data() {
           store.apartments = response.data;
           store.city = city;
 
-          this.$router.push({ name: 'AdvancedSearch' });
+          this.$router.push({ name: 'AdvancedSearch', 
+          params: { 
+            searchCity: this.searchCity,
+            n_rooms: this.n_rooms,
+            n_beds: this.n_beds,
+            distance: this.distance,
+          } });
         } 
        
     },
