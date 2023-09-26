@@ -18,7 +18,7 @@ export default {
     <div class="jumbotron-footer pb-3">
 
         <!--  -->
-        <hr>
+        <hr class="m-0 mb-4">
         <div class="container">
             <div class="row">
                 <!-- LINK UTILI FOOTER -->
