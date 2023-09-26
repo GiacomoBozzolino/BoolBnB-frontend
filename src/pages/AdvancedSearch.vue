@@ -75,10 +75,10 @@ data() {
 
           this.$router.push({ name: 'AdvancedSearch', 
           params: { 
-            searchCity: this.searchCity,
-            n_rooms: this.n_rooms,
-            n_beds: this.n_beds,
-            distance: this.distance,
+            searchCity: `city-name&${this.searchCity}`,
+            distance:  `range&${this.distance}`,
+            n_rooms: `room&${this.n_rooms }`,
+            n_beds:  `beds&${this.n_beds}`,
           } });
         } 
        
