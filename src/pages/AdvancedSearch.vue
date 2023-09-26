@@ -147,8 +147,12 @@ data() {
       <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
 
     </form>
-  </div>
 
+    <div v-if="filteredApartments.length === 0" class="no-results">
+      <p>-- Ci spiace ma non ci sono risultati --</p>
+    </div>
+
+    </div>
         <div class="col-12 d-flex flex-wrap my-4">
         <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in filteredApartments" :key="index">
           <div class="card-image-top">
@@ -225,5 +229,12 @@ data() {
 
 .btn:disabled{
   background-color: gray;
+}
+
+.no-results {
+  font-size: larger;
+  text-align: center;
+  margin: 100px;
+  color: red;
 }
 </style>
