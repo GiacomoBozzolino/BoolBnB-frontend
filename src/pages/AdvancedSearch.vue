@@ -92,7 +92,7 @@ data() {
 <template>
   <div class="container">
     <div class="row">
-        <h1>PAGINA RICERCA AVANZATA</h1>
+   
         <div>
     <form @submit.prevent="searchAdvancedApartment(searchCity)" autocomplete="off">
       <div class="form-floating mb-3 col-5 col-lg-8 mx-auto ms-lg-0">
@@ -141,20 +141,6 @@ data() {
     </form>
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="col-12 d-flex flex-wrap my-4">
         <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in filteredApartments" :key="index">
           <div class="card-image-top">
@@ -169,7 +155,7 @@ data() {
                 <strong>{{ apartment.address }}</strong>
               </p> 
               <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-person-shelter"></i> Numero letti:
+                <i class="fa-solid fa-person-shelter"></i> Numero camere:
                 <strong>{{ apartment.n_rooms }}</strong>
               </p>
               <p class="card-text py-2 text-start">
@@ -177,7 +163,7 @@ data() {
                 <strong>{{ apartment.n_bathrooms }}</strong>
               </p>
               <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-bed"></i> Numero letto:
+                <i class="fa-solid fa-bed"></i> Numero letti:
                 <strong>{{ apartment.n_beds }}</strong>
               </p>
               <p class="card-text py-2 text-start">
