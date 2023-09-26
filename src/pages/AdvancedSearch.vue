@@ -6,6 +6,8 @@ import AppLoader from '../components/AppLoader.vue';
 import SearchBar from "../components/SearchBar.vue";
 import RenderApartments from "../components/RenderApartments.vue";
 
+
+
 export default {
   name: "AdvancedSearch",
   components: {
@@ -21,8 +23,9 @@ export default {
       distance: this.$route.params.distance || 0,
       suggestions: [],
       store,
-
-      // Range
+      // SERVIZI
+      selectedServices: [],
+      services: [],
 
     }
   },
@@ -44,7 +47,9 @@ export default {
   methods: {
     async searchSuggestions() {
       if (this.searchCity !== '') {
-        const response = await axios.get(`https://api.tomtom.com/search/2/search/${this.searchCity}.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`, {
+        const response = await axios.get(`https://api.tomtom.com/search/2/search/${this.searchCity}.json?key=hThUeWOkuwn7VZV1hYMz1TA6KlJr6vsL&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`, {
+        //zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p brusa
+        // hThUeWOkuwn7VZV1hYMz1TA6KlJr6vsL eugeniu
         });
         this.suggestions = response.data.results;
       } else {
@@ -59,6 +64,8 @@ export default {
             n_rooms: this.n_rooms,
             n_beds: this.n_beds,
             distance: this.distance,
+            // prima che si fermasse tom tom ho aggiunto questo 
+            services: this.selectedServices,
           },
         });
         store.apartments = response.data;
@@ -79,12 +86,13 @@ export default {
       this.suggestions = [];
       console.log(this.searchCity)
     },
+
     getServices() {
-        axios.get(`${store.apartmentsUrl}/api/services`).then((response) => {
-          this.services = response.data.results;
-          console.log(this.services)
-        });
-      },
+      axios.get(`${store.apartmentsUrl}/api/services`).then((response) => {
+        this.services = response.data.results;
+        console.log(this.services)
+      });
+    },
   },
 
   created() {
@@ -135,19 +143,25 @@ export default {
           <!-- RANGE ROOMS -->
           <div class="d-flex">
             <div class="p-2">
-              <label for="n_rooms" class="form-label">Numero Stanze <font-awesome-icon :icon="['fas', 'house']" /></label>
+              <label for="n_rooms" class="form-label">Numero Stanze</label>
               <input type="number" class="form-control" v-model="n_rooms" id="n_rooms" name="n_rooms" min="1" max="15" >
             </div>
             <!-- RANGE BEDS -->
             <div class=" p-2">
-              <label for="n_beds" class="form-label">Numero Letti <font-awesome-icon :icon="['fas', 'house']" /></label>
+              <label for="n_beds" class="form-label">Numero Letti</label>
               <input type="number" class="form-control" v-model="n_beds" id="n_beds" name="n_beds" min="1" max="15">
             </div>
           </div>
           <!-- DA AGGIUNGERE I SERVIZI -->
-
+          <div class="p-2">
+            <div class="form-check" v-for="(service, index) in this.services" :key="index + 1">
+              <input type="checkbox" class="form-check-input" name="selectedServices" :id="'service' + service.id" v-model="selectedServices" :value="service.id">
+              <!-- <span class="mx-2" v-html="service.icon"></span> -->
+              <label :for="'service' + service.id" class="form-check-label">{{ service.type }}</label>
+            </div>
+          </div>
           <!-- Bottone Cerca -->
-          <div class="d-flex align-items-center justify-content-center mt-2">
+          <div class="d-flex align-items-center justify-content-center mt-2 mb-5">
             <button type="submit" class="btn btn-primary" :disabled="searchCity === ''">Cerca</button>
           </div>
 
