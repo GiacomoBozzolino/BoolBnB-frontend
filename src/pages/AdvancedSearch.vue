@@ -16,7 +16,7 @@ export default {
 
 data() {
     return {
-      searchCity: store.searchCity || '',
+      searchCity: store.searchCity || this.$route.params.searchCity ||  '',
       n_rooms: this.$route.params.n_rooms || '',
       n_beds: this.$route.params.n_beds || '',
       distance: this.$route.params.distance || '',
@@ -75,10 +75,10 @@ data() {
 
           this.$router.push({ name: 'AdvancedSearch', 
           params: { 
-            searchCity: `city-name&${this.searchCity}`,
-            distance:  `range&${this.distance}`,
-            n_rooms: `room&${this.n_rooms }`,
-            n_beds:  `beds&${this.n_beds}`,
+            searchCity: `${this.searchCity}`,
+            distance:  `${this.distance}`,
+            n_rooms: `${this.n_rooms }`,
+            n_beds:  `${this.n_beds}`,
           } });
         } 
        
