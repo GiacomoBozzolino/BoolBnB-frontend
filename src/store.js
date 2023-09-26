@@ -11,6 +11,7 @@ export const store = reactive({
     searchApartments: '',
     city: "",
     apartmentsSearch: [],
+    searchCity: '',
     // extras
     loading: true,
 });

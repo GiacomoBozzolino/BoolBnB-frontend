@@ -6,15 +6,15 @@ import { store } from '../store';
 export default {
   data() {
     return {
-      searchCity: '',
+      store,
       suggestions: [],
     };
   },
   methods: {
     // FUNZIONE RICERCA SUGGERIMENTI
     async searchSuggestions() {
-      if (this.searchCity !== '') {
-          const response = await axios.get(`https://api.tomtom.com/search/2/search/${this.searchCity}.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`, {
+      if (store.searchCity !== '') {
+          const response = await axios.get(`https://api.tomtom.com/search/2/search/${store.searchCity}.json?key=zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`, {
             
           });
 
@@ -27,7 +27,7 @@ export default {
 
 // FUNZIONE DI RICERCA INDIRIZZO NEL DB
     async searchApartment(city) {
-      if (this.searchCity !== '') {
+      if (store.searchCity !== '') {
         
           const response = await axios.get(`http://localhost:8000/api/search`, {
             params: {
@@ -45,9 +45,9 @@ export default {
 
     // FUNZIONE SELEZIONE INDIRIZZO DAI SUGGERIMENTI
     selectSuggestion(suggestion) {
-      this.searchCity = suggestion.address.freeformAddress;
+      store.searchCity = suggestion.address.freeformAddress;
       this.suggestions = [];
-      console.log(this.searchCity)
+      console.log(store.searchCity)
     },
   },
 };
@@ -55,7 +55,7 @@ export default {
 
 <template>
   <div class="input-group">
-    <form @submit.prevent="searchApartment(searchCity)" autocomplete="off" class="d-flex">
+    <form @submit.prevent="searchApartment(store.searchCity)" autocomplete="off" class="d-flex">
       <div>
         <div class="form-group">
           
@@ -64,7 +64,7 @@ export default {
             class="form-control text-dark"
             id="city"
             placeholder="Cerca"
-            v-model="searchCity"
+            v-model="store.searchCity"
             @input="searchSuggestions"
           >
         </div>
@@ -78,7 +78,7 @@ export default {
         </div>
       </div>
         <div class="form-group px-2 ">
-          <button type="submit" class="btn btn-primary" :disabled="searchCity === '' " >Cerca</button>
+          <button type="submit" class="btn btn-primary" :disabled="store.searchCity === '' " >Cerca</button>
         </div>
     </form>
       <!-- Bottone Cerca -->

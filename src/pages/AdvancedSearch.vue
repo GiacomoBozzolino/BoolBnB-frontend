@@ -16,7 +16,7 @@ export default {
 
 data() {
     return {
-      searchCity: '',
+      searchCity: store.searchCity,
       suggestions: [],
       store,
       n_rooms:'',
