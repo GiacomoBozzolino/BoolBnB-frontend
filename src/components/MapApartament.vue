@@ -36,7 +36,7 @@ export default {
                 let latitude = this.apartment.latitude
                 let map = tt.map({
                     container: "map",
-                    key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
+                    key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p", //zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p brusa ||  hThUeWOkuwn7VZV1hYMz1TA6KlJr6vsL eugeniu
                     center: [long, latitude],
                     zoom:15
                 })

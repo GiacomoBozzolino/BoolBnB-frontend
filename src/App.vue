@@ -60,7 +60,7 @@
 @use './styles/generals.scss' as *;
 
 .margin-top{
-  margin-top: 135px;
+  margin-top: 120px;
 }
 
 </style>
