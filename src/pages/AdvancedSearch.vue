@@ -1,5 +1,4 @@
 <script>
-// importo stro e aCSios dove si trova la base API
 import { store } from "../store";
 import axios from "axios";
 import AppLoader from '../components/AppLoader.vue';
@@ -24,6 +23,8 @@ export default {
       n_rooms:'',
       n_beds:'',
       distance:'',
+      longitude: null, // Aggiungi queste due nuove variabili
+      latitude: null,  // Aggiungi queste due nuove variabili
     }
 
   },
@@ -34,8 +35,6 @@ export default {
     filteredApartments() {
       return store.apartments.filter((apartments) => {
         const query = store.searchApartments.toLowerCase();
-        // console.log(query);
-        // Esegui una ricerca per nome, città o numero di stanze
         return (
           apartments.title.toLowerCase().includes(query)
         );
@@ -68,7 +67,7 @@ export default {
       }
     },
 
-// FUNZIONE DI RICERCA INDIRIZZO NEL DB
+    // FUNZIONE DI RICERCA INDIRIZZO NEL DB
     async searchAdvancedApartment(city) {
       if (this.searchCity !== '') {
           const response = await axios.get(`http://localhost:8000/api/searchAdvanced`, {
@@ -83,6 +82,9 @@ export default {
           store.apartments = response.data;
           store.city = city;
 
+          this.longitude = response.data[0].longitude; // Aggiorna con i dati della tua API
+          this.latitude = response.data[0].latitude;   // Aggiorna con i dati della tua API
+
           this.$router.push({ name: 'AdvancedSearch' });
         } 
        
@@ -96,22 +98,31 @@ export default {
     },
   },
 
-  //FUNZIONE PER VISUALIZZARE LA MAPPA
-  viewMap(longitude, latitude) {
-    let map = tt.map({
-      container: "map",
-      key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
-      center: [longitude, latitude],
-      zoom: 15
-    });
+  mounted() {
+    if (this.longitude && this.latitude) {
+      this.showMapForApartment(this.longitude, this.latitude);
+    }
+  },
 
-    var marker = new tt.Marker().setLngLat([longitude, latitude]).addTo(map);
+  methods: {
+    //FUNZIONE PER VISUALIZZARE LA MAPPA
+    showMapForApartment(longitude, latitude) {
+      let map = tt.map({
+        container: "map",
+        key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
+        center: [longitude, latitude],
+        zoom: 15
+      });
+
+      let marker = new tt.Marker().setLngLat([longitude, latitude]).addTo(map);
+    }
   }
-
 };
 </script>
 
 <template>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+
   <div class="container">
     <div class="row">
       <form @submit.prevent="searchAdvancedApartment(searchCity)" autocomplete="off">
@@ -160,19 +171,11 @@ export default {
 
       </form>
     </div>
-    <div class="container">
-      <div class="row">
-          <div class="col-12 mt-3">
-              <div class="row justify-content-center">
-                <MapApartment :apartments="filtered"></MapApartment>
-              </div> 
-          </div>
-        </div>
-    </div>
     <div v-if="filteredApartments.length === 0" class="no-results">
       <p>-- Ci spiace ma non ci sono risultati --</p>
     </div>
     <div v-else>
+      <div id="map" style="width: 100%; height: 500px;"></div>
       <div class="col-12 d-flex flex-wrap my-4">
         <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in filteredApartments" :key="index">
           <div class="card-image-top">
