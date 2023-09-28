@@ -22,13 +22,14 @@ export default {
 
 
           this.button = document.querySelector('.s')
-
-          if (this.suggestions == 0) {
-            this.button.disabled = true
-          }else{
-            this.button.disabled = false
-          }
-        } 
+          if  (this.button){          
+            if (this.suggestions == 0) {
+                this.button.disabled = true
+              }else{
+                this.button.disabled = false
+              }
+          }        
+      } 
        else {
         this.suggestions = [];
       }

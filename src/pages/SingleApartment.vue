@@ -37,10 +37,7 @@
                     }else{
                         this.$router.push({name:'not-found'});
                     }
-                    
                 });
-                
-
             }
         },
     }
@@ -86,17 +83,17 @@
         </div>
 
     </div>
+
+    <!-- Map + ContactForm -->
     <div class="container">
         <div class="row">
             <div class="col-12 mt-3">
                 <div class="row justify-content-center">
-                    <MapApartament></MapApartament>
+                    <MapApartament :apartment="[apartment]" v-if="apartment"/>
                     <ContactForm :apartment="apartment"/>
                 </div> 
-                
             </div>
         </div>
-        
     </div>
   
 </template>
