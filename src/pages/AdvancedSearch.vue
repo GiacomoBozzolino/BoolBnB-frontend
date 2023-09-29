@@ -252,8 +252,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-  @use '../styles/generals.scss' as *;
-
   hr {
     border: 0;
     height: 1px;

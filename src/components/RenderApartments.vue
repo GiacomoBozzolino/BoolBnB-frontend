@@ -29,6 +29,7 @@ export default {
         // per il loading
         if(response.data.success){
             store.apartments = response.data.results;
+            console.log(store.apartments);
             store.loading = false;
         }
       });
@@ -90,7 +91,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-  @use '../styles/generals.scss' as *;
 .z {
   background-color: red;
 }
