@@ -52,58 +52,52 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-12 d-flex justify-content-center align-items-center py-5" v-if="store.loading">
         <AppLoader/>
       </div>
-      <div class="col-12 d-flex flex-wrap my-4" v-else>
-        <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in shouldShowItem()" :key="index" v-if="shouldShowItem">
+      <div class="col-12 d-flex flex-wrap justify-content-center my-4" v-else>
+        <!-- START CARD -->
+        <div class="mx-4 my-4 super-card p-3 rounded-4" style="width: 34rem; " v-for="(apartment, index) in shouldShowItem()" :key="index" v-if="shouldShowItem">
+          <!-- IMMAGINE -->
           <div class="card-image-top">
-            <!-- da sistemare lo storage -->
-            <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
+            <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid rounded-5 " />
           </div>
-          <div class="card-body">
-            <h4 class="card-title text-center">{{ apartment.title }}</h4>
-            <div class="description-card overflow-auto mt-2">
-              <!-- INDIRIZZO -->
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-location-dot"></i> Indirizzo: 
-                <strong>{{ apartment.address }}</strong>
-              </p> 
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-person-shelter"></i> Numero stanze:
-                <strong>{{ apartment.n_rooms }}</strong>
-              </p>
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-bath"></i> Numero bagni:
-                <strong>{{ apartment.n_bathrooms }}</strong>
-              </p>
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-bed"></i> Numero letti:
-                <strong>{{ apartment.n_beds }}</strong>
-              </p>
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-file-medical"></i> Breve descrizione:
-                <strong>{{ apartment.description }}</strong>
-              </p>
-              <p class="card-text py-2 text-start">
+          <!-- CONTENUTO DELLA CARTA  -->
+          <div class="card-body text-start mt-2">
+            <h5 class="card-title"><strong>{{ apartment.title }}</strong></h5>
+            <span class=""><i class="fa-solid fa-location-dot"></i> {{ apartment.address }}</span> 
+              <span class="card-text d-block">
+                <span v-for='item in apartment.services' :key='item.id'>
+                  <span class="me-2 mt-2" v-html="item.icon"></span>
+                </span>
+              </span>
+              <span class="">
                 <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
                 <strong>{{ apartment.square_meters }}</strong>
-              </p> 
-            </div>
+              </span> 
+
           </div>
-          <div class="card-footer">
-            <router-link class="btn btn-sm btn-primary" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+          <div class="card-footer d-flex justify-content-end">
+            <router-link class="btn btn-color border rounded-pill" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
           </div>
         </div>
+        <!-- END CARD -->
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+  @use '../styles/generals.scss' as *;
 .z {
   background-color: red;
+}
+.super-card{
+  transition: background-color 0.3s ease;
+}
+.super-card:hover{
+  background-color: #ded0de;
 }
 </style>
