@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       store,
-      sponsoredApartments: [],
+
     };
   },
   
@@ -22,10 +22,10 @@ export default {
         .then((response) => {
           // Filtra gli appartamenti in base alla data corrente e alla presenza di sponsor
           const currentDate = new Date();
-          this.sponsoredApartments = response.data.filter(apartment => 
+          store.sponsoredApartments = response.data.filter(apartment => 
             apartment.sponsors.length > 0 && new Date(apartment.sponsors[0].pivot.end_at) > currentDate
           );
-          console.log(this.sponsoredApartments);
+          console.log(store.sponsoredApartments);
         })
         .catch((error) => {
           console.error(error);
@@ -47,7 +47,7 @@ export default {
       </div>
       <div class="col-12 d-flex flex-wrap my-4" v-else>
         <!-- Itera sugli appartamenti sponsorizzati e mostra le informazioni -->
-        <div v-for="apartment in this.sponsoredApartments" :key="apartment.id" class="col-md-4 mb-4">
+        <div v-for="apartment in store.sponsoredApartments" :key="apartment.id" class="col-md-4 mb-4">
           <div class="card p-3 bg-warning">
             <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="card-img-top" alt="Apartment Image">
             <div class="card-body">

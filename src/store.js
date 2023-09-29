@@ -13,4 +13,9 @@ export const store = reactive({
     apartmentsSearch: [],
     // extras
     loading: true,
+
+
+
+    // array riempi dall'api delle sponsorizzazioni
+    sponsoredApartments: [],
 });

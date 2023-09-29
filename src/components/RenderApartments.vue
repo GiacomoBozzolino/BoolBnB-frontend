@@ -34,6 +34,15 @@ export default {
       });
     },
 
+    shouldShowItem() {
+      // Controlla se l'ID dell'elemento è presente anche nell'array2
+      return store.apartments.filter((apartment) => {
+        return !store.sponsoredApartments.some(
+          (sponsoredApartment) => sponsoredApartment.id === apartment.id
+        );
+      });
+    }
+
   },
 
   created() {
@@ -49,7 +58,7 @@ export default {
         <AppLoader/>
       </div>
       <div class="col-12 d-flex flex-wrap my-4" v-else>
-        <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in store.apartments" :key="index">
+        <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in shouldShowItem()" :key="index" v-if="shouldShowItem">
           <div class="card-image-top">
             <!-- da sistemare lo storage -->
             <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
