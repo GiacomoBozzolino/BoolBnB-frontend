@@ -5,6 +5,7 @@ import axios from "axios";
 import AppLoader from '../components/AppLoader.vue';
 import SearchBar from "../components/SearchBar.vue";
 import RenderApartments from "../components/RenderApartments.vue";
+import MapApartament from '../components/MapApartament.vue';
 
 
 
@@ -14,7 +15,9 @@ export default {
     AppLoader,
     SearchBar,
     RenderApartments,
+    MapApartament,
   },
+
   data() {
     return {
       searchCity: store.searchCity || this.$route.params.searchCity ||  '',
@@ -23,6 +26,7 @@ export default {
       distance: this.$route.params.distance || 0,
       suggestions: [],
       store,
+      apartment:'',
       // SERVIZI
       services: [],
       selectedServices: [],
@@ -217,6 +221,7 @@ export default {
           </div>
         </div>
       </div>
+      <MapApartament :apartment="filteredApartments" v-if="filteredApartments.length>0"></MapApartament>
     </div>
   </div>
 </template>
