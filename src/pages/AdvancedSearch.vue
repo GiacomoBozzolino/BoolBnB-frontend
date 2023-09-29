@@ -123,7 +123,8 @@ export default {
   mounted() {
     if (this.longitude && this.latitude) {
       this.showMapForApartment(this.longitude, this.latitude);
-    }
+    };
+    
   },
 };
 </script>
@@ -166,7 +167,7 @@ export default {
             <label for="distance" class="form-label mt-2">Imposta raggio di ricerca</label>
             <div class="range-container d-flex align-items-center justify-content-between">
               <input type="range" class="form-range border rounded-5 p-2" v-model="distance" id="distance" name="n_rooms" min="1" max="50">
-              <span class="ms-3 badge bg-primary badge-pill px-3">{{ rangeValue}}</span>
+              <span class="ms-3 rounded-5 btn-color px-3">{{ rangeValue}}</span>
             </div>
           </div>
 
@@ -192,25 +193,29 @@ export default {
           </div>
           <!-- Bottone Cerca -->
           <div class="d-flex align-items-center justify-content-center mt-2 mb-3">
-            <button type="submit" class="btn btn-primary" :disabled="searchCity === ''">Cerca</button>
+            <button type="submit" class="btn btn-color" :disabled="searchCity === ''">Cerca</button>
           </div>
 
         </form>
         <!-- INZIO MAPA -->
         <div class="mb-4">
+          <!-- Button trigger modal -->
           <div id="map" style="width: 100%; height: 500px;">
             <MapApartament :apartment="filteredApartments" v-if="filteredApartments.length>0"></MapApartament>
           </div>
         </div>
       </div>
+      <!-- -------------------------------------------------------------------------------- -->
       <div class="col-10  my-4">
         <!-- SE LA RICERCA NON HA APPARTAMENTI -->
         <div v-if="filteredApartments.length === 0" class="no-results">
-          <p>-- Ci spiace ma non ci sono risultati --</p>
+          <hr>
+          <h4>-- Ci spiace ma non ci sono risultati --</h4>
+          <hr>
         </div>
         <!-- CONTROLLO SE LA RICERCA HA APARTAMENTI -->
         <div v-else class="d-flex flex-wrap justify-content-center">
-          <div class="mx-4 my-4 super-card p-3 rounded-4" style="width: 40rem;" v-for="(apartment, index) in filteredApartments" :key="index">
+          <div class="m-3 super-card p-3 rounded-5" style="width: 40rem;" v-for="(apartment, index) in filteredApartments" :key="index">
           <!-- IMMAGINE -->
           <div class="card-image-top">
             <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid rounded-5 " />
@@ -220,13 +225,19 @@ export default {
             <h5 class="card-title"><strong>{{ apartment.title }}</strong></h5>
             <span class=""><i class="fa-solid fa-location-dot"></i> {{ apartment.address }}</span> 
             <span class="card-text d-block">
-              <span v-for='item in apartment.services' :key='item.id'>
-                <span class="me-2 mt-2" v-html="apartment.icon"></span>
-              </span>
+              <span v-for='item in apartment.services' :key='item.id' class="me-2 mt-2" v-html="item.icon"></span>
             </span>
-            <span class="">
-              <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
+            <span class="d-block">
+              <i class="fa-solid fa-ruler-combined"></i> Metri quadri 
               <strong>{{ apartment.square_meters }}</strong>
+            </span> 
+            <span class="d-block">
+              <i class="fa-solid fa-house-user"></i> Numero stanze
+              <strong>{{ apartment.n_rooms }}</strong>
+            </span> 
+            <span class="d-block">
+              <i class="fa-solid fa-bed"></i> Numeri letti
+              <strong>{{ apartment.n_beds }}</strong>
             </span> 
           </div>
           <div class="card-footer d-flex justify-content-end">
@@ -242,6 +253,13 @@ export default {
 
 <style lang="scss" scoped>
   @use '../styles/generals.scss' as *;
+
+  hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(254, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  }
+
 .z {
   background-color: red;
 }
@@ -249,7 +267,7 @@ export default {
   transition: background-color 0.3s ease;
 }
 .super-card:hover{
-  background-color: #ded0de;
+  background-color: #C1DBE3;
 }
 
 .suggestions {
