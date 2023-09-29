@@ -34,8 +34,8 @@ export default {
       });
     },
 
+    // Controlla se l'ID dell'elemento è presente anche nell'array2
     shouldShowItem() {
-      // Controlla se l'ID dell'elemento è presente anche nell'array2
       return store.apartments.filter((apartment) => {
         return !store.sponsoredApartments.some(
           (sponsoredApartment) => sponsoredApartment.id === apartment.id
