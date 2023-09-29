@@ -18,9 +18,9 @@ export default {
   data() {
     return {
       searchCity: store.searchCity || this.$route.params.searchCity ||  '',
-      n_rooms: this.$route.params.n_rooms || '',
-      n_beds: this.$route.params.n_beds || '',
-      distance: this.$route.params.distance || 0,
+      n_rooms: this.$route.params.n_rooms || 1,
+      n_beds: this.$route.params.n_beds || 1,
+      distance: this.$route.params.distance || 20,
       suggestions: [],
       store,
       apartment:'',
@@ -134,7 +134,7 @@ export default {
   <div class="container-fluid">
     <div class="row">
       <!-- FORM CONTAINER -->
-      <div class="form-container sidebar col-2 border-end border-3 bg-color-search ">
+      <div class="col-2 form-container sidebar border-end border-3 bg-color-search ">
         <div class="border rounded-5 text-center my-3 shadow bg-light-subtle">
           <h3 class="px-2 pt-2">Ricerca avanzata</h3>
         </div>
@@ -165,7 +165,7 @@ export default {
           <div class=" p-2">
             <label for="distance" class="form-label mt-2">Imposta raggio di ricerca</label>
             <div class="range-container d-flex align-items-center justify-content-between">
-              <input type="range" class="form-range border rounded-5 p-2" v-model="distance" id="distance" name="n_rooms" min="1" max="300">
+              <input type="range" class="form-range border rounded-5 p-2" v-model="distance" id="distance" name="n_rooms" min="1" max="50">
               <span class="ms-3 badge bg-primary badge-pill px-3">{{ rangeValue}}</span>
             </div>
           </div>
@@ -191,67 +191,65 @@ export default {
             </div>
           </div>
           <!-- Bottone Cerca -->
-          <div class="d-flex align-items-center justify-content-center mt-2 mb-5">
+          <div class="d-flex align-items-center justify-content-center mt-2 mb-3">
             <button type="submit" class="btn btn-primary" :disabled="searchCity === ''">Cerca</button>
           </div>
 
         </form>
-      </div>
-      <div v-if="filteredApartments.length === 0" class="no-results">
-        <p>-- Ci spiace ma non ci sono risultati --</p>
-      </div>
-      <div v-else>
-        <div id="map" style="width: 100%; height: 500px;"></div>
-      </div>
-      <div v-else>
-        <div class="col-10 d-flex flex-wrap justify-content-center my-4">
-          <div class="card m-3" style="width: 23rem;" v-for="(apartment, index) in filteredApartments" :key="index">
-            <div class="card-image-top">
-              <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
-            </div>
-            <div class="card-body">
-              <h4 class="card-title text-center">{{ apartment.title }}</h4>
-              <div class="description-card overflow-auto mt-2">
-                <p class="card-text py-2 text-start">
-                  <i class="fa-solid fa-location-dot"></i> Indirizzo:
-                  <strong>{{ apartment.address }}</strong>
-                </p>
-                <p class="card-text py-2 text-start">
-                  <i class="fa-solid fa-person-shelter"></i> Numero camere:
-                  <strong>{{ apartment.n_rooms }}</strong>
-                </p>
-                <p class="card-text py-2 text-start">
-                  <i class="fa-solid fa-bath"></i> Numero bagni:
-                  <strong>{{ apartment.n_bathrooms }}</strong>
-                </p>
-                <p class="card-text py-2 text-start">
-                  <i class="fa-solid fa-bed"></i> Numero letti:
-                  <strong>{{ apartment.n_beds }}</strong>
-                </p>
-                <p class="card-text py-2 text-start">
-                  <i class="fa-solid fa-file-medical"></i> Breve descrizione:
-                  <strong>{{ apartment.description }}</strong>
-                </p>
-                <p class="card-text py-2 text-start">
-                  <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
-                  <strong>{{ apartment.square_meters }}</strong>
-                </p>
-              </div>
-            </div>
-            <div class="card-footer">
-              <router-link class="btn s btn-sm btn-primary" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
-            </div>
+        <!-- INZIO MAPA -->
+        <div class="mb-4">
+          <div id="map" style="width: 100%; height: 500px;">
+            <MapApartament :apartment="filteredApartments" v-if="filteredApartments.length>0"></MapApartament>
           </div>
         </div>
       </div>
+      <div class="col-10  my-4">
+        <!-- SE LA RICERCA NON HA APPARTAMENTI -->
+        <div v-if="filteredApartments.length === 0" class="no-results">
+          <p>-- Ci spiace ma non ci sono risultati --</p>
+        </div>
+        <!-- CONTROLLO SE LA RICERCA HA APARTAMENTI -->
+        <div v-else class="d-flex flex-wrap justify-content-center">
+          <div class="mx-4 my-4 super-card p-3 rounded-4" style="width: 40rem;" v-for="(apartment, index) in filteredApartments" :key="index">
+          <!-- IMMAGINE -->
+          <div class="card-image-top">
+            <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid rounded-5 " />
+          </div>
+          <!-- CONTENUTO DELLA CARD  -->
+          <div class="card-body text-start mt-2">
+            <h5 class="card-title"><strong>{{ apartment.title }}</strong></h5>
+            <span class=""><i class="fa-solid fa-location-dot"></i> {{ apartment.address }}</span> 
+            <span class="card-text d-block">
+              <span v-for='item in apartment.services' :key='item.id'>
+                <span class="me-2 mt-2" v-html="apartment.icon"></span>
+              </span>
+            </span>
+            <span class="">
+              <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
+              <strong>{{ apartment.square_meters }}</strong>
+            </span> 
+          </div>
+          <div class="card-footer d-flex justify-content-end">
+            <router-link class="btn btn-color border rounded-pill" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+          </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <MapApartament :apartment="filteredApartments" v-if="filteredApartments.length>0"></MapApartament>
   </div>
 </template>
 
 <style lang="scss" scoped>
+  @use '../styles/generals.scss' as *;
 .z {
   background-color: red;
+}
+.super-card{
+  transition: background-color 0.3s ease;
+}
+.super-card:hover{
+  background-color: #ded0de;
 }
 
 .suggestions {
