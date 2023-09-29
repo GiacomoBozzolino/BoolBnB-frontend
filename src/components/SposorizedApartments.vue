@@ -53,6 +53,7 @@ export default {
             <div class="card-body">
               <h5 class="card-title">{{ apartment.title }}</h5>
               <p class="card-text">{{ apartment.description }}</p>
+              <h1>aiwehfnasfiuenaefnifni</h1>
               <!-- Altre informazioni sull'appartamento -->
             </div>
           </div>
