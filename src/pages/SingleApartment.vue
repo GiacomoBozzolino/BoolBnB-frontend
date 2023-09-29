@@ -40,6 +40,38 @@
                 });
             }
         },
+
+
+        mounted() {
+        axios
+            .get("https://api.ipify.org?format=json")
+            .then((response) => {
+                const ipAddress = response.data.ip;
+
+                axios
+                    .post("http://localhost:8000/api/visitor/store", {
+                        apartment_id: this.apartment.id,
+                        ip_address: ipAddress,
+                    })
+                    .then((response) => {
+                        if (response.data.success) {
+                            console.log("View has been registered.");
+                        } else {
+                            console.log("Error: " + response.data.message);
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error while storing view: " + error);
+                    });
+            })
+            .catch((error) => {
+                console.error("Error while fetching IP address: " + error);
+            });
+    },
+
+
+
+
     }
 
 </script>
