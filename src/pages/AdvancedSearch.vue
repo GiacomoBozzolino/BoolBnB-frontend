@@ -180,44 +180,48 @@ export default {
 
         </form>
       </div>
-
-      <div class="col-10 d-flex flex-wrap justify-content-center my-4">
-        <div class="card m-3" style="width: 23rem;" v-for="(apartment, index) in filteredApartments" :key="index">
-          <div class="card-image-top">
-            <!-- da sistemare lo storage -->
-            <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
-          </div>
-          <div class="card-body">
-            <h4 class="card-title text-center">{{ apartment.title }}</h4>
-            <div class="description-card overflow-auto mt-2">
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-location-dot"></i> Indirizzo:
-                <strong>{{ apartment.address }}</strong>
-              </p>
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-person-shelter"></i> Numero camere:
-                <strong>{{ apartment.n_rooms }}</strong>
-              </p>
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-bath"></i> Numero bagni:
-                <strong>{{ apartment.n_bathrooms }}</strong>
-              </p>
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-bed"></i> Numero letti:
-                <strong>{{ apartment.n_beds }}</strong>
-              </p>
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-file-medical"></i> Breve descrizione:
-                <strong>{{ apartment.description }}</strong>
-              </p>
-              <p class="card-text py-2 text-start">
-                <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
-                <strong>{{ apartment.square_meters }}</strong>
-              </p>
+      <div v-if="filteredApartments.length === 0" class="no-results">
+        <p>-- Ci spiace ma non ci sono risultati --</p>
+      </div>
+      <div v-else>
+        <div class="col-10 d-flex flex-wrap justify-content-center my-4">
+          <div class="card m-3" style="width: 23rem;" v-for="(apartment, index) in filteredApartments" :key="index">
+            <div class="card-image-top">
+              <!-- da sistemare lo storage -->
+              <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
             </div>
-          </div>
-          <div class="card-footer">
-            <router-link class="btn s btn-sm btn-primary" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+            <div class="card-body">
+              <h4 class="card-title text-center">{{ apartment.title }}</h4>
+              <div class="description-card overflow-auto mt-2">
+                <p class="card-text py-2 text-start">
+                  <i class="fa-solid fa-location-dot"></i> Indirizzo:
+                  <strong>{{ apartment.address }}</strong>
+                </p>
+                <p class="card-text py-2 text-start">
+                  <i class="fa-solid fa-person-shelter"></i> Numero camere:
+                  <strong>{{ apartment.n_rooms }}</strong>
+                </p>
+                <p class="card-text py-2 text-start">
+                  <i class="fa-solid fa-bath"></i> Numero bagni:
+                  <strong>{{ apartment.n_bathrooms }}</strong>
+                </p>
+                <p class="card-text py-2 text-start">
+                  <i class="fa-solid fa-bed"></i> Numero letti:
+                  <strong>{{ apartment.n_beds }}</strong>
+                </p>
+                <p class="card-text py-2 text-start">
+                  <i class="fa-solid fa-file-medical"></i> Breve descrizione:
+                  <strong>{{ apartment.description }}</strong>
+                </p>
+                <p class="card-text py-2 text-start">
+                  <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
+                  <strong>{{ apartment.square_meters }}</strong>
+                </p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <router-link class="btn s btn-sm btn-primary" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -253,6 +257,13 @@ export default {
 }
 .btn:disabled {
   background-color: gray;
+}
+
+.no-results {
+  font-size: larger;
+  text-align: center;
+  margin: 100px;
+  color: red;
 }
 
 // SEARCH FORM
