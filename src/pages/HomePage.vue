@@ -40,19 +40,40 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-6 mx-auto d-flex justify-content-center align-items-center">
-        <SearchBar @apartmentSearch="filteredApartments"/>
+  <!-- PARTE DELLA RICERCA -->
+  <div class="jumbotron-search">
+    <div class="container">
+      <div class="row">
+        <div class="my-4 col-12 d-flex justify-content-center align-items-center">
+          <div class="search-container d-flex ">
+            <SearchBar @apartmentSearch="filteredApartments"/>
+          </div>
+          <h4 class="ms-5">Cerca la tua prossima destinazione <i class="fa-solid fa-house-flag ms-1"></i></h4>
+        </div>
       </div>
     </div>
-    <SposorizedApartments/>
-    <RenderApartments/>
+  </div>
+
+
+  
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <div class="col-12">
+      <SposorizedApartments/>
+    </div> -->
+    <div class="col-12">
+      <RenderApartments/>
+    </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .z {
   background-color: red;
+}
+
+.jumbotron-search{
+  background-color: #C1DBE3;
 }
 </style>

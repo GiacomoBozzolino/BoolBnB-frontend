@@ -72,7 +72,7 @@ export default {
 }
 
 .logo:hover {
-    background-color: #B2B5E0;
+    background-color: #F6FEAA;
     color: black;
 }
 
@@ -82,7 +82,7 @@ export default {
 
 .link-hover-header:hover {
     // background-color: #DFBE99;
-    background-color: #B2B5E0;
+    background-color: #F6FEAA;
 }
 
 .nav-background {

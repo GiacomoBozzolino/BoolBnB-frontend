@@ -1,12 +1,12 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
-import AppLoader from '../components/AppLoader.vue';
+
 
 export default {
   name: "HomePage",
   components:{
-    AppLoader,
+
   },
 
   data() {
@@ -43,7 +43,6 @@ export default {
   <div class="container">
     <div class="row">
       <div class="col-12 d-flex justify-content-center align-items-center py-5" v-if="store.loading">
-        <AppLoader/>
       </div>
       <div class="col-12 d-flex flex-wrap my-4" v-else>
         <!-- Itera sugli appartamenti sponsorizzati e mostra le informazioni -->

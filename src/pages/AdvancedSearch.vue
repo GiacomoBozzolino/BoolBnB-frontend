@@ -1,4 +1,3 @@
-
 <script>
 import { store } from "../store";
 import axios from "axios";
@@ -29,50 +28,43 @@ export default {
       services: [],
       selectedServices: [],
 
-      longitude: null, // Aggiungi queste due nuove variabili
-      latitude: null,  // Aggiungi queste due nuove variabili
+      longitude: null,
+      latitude: null,
     }
   },
+
+
   computed: {
-    // Funziona questa??
     filteredApartments() {
       return store.apartments.filter((apartments) => {
         const query = store.searchApartments.toLowerCase();
-        return (
-          apartments.title.toLowerCase().includes(query)
-        );
-
+        return apartments.title.toLowerCase().includes(query);
       });
     },
     
-    // Range
     rangeValue() {
       return `${this.distance}km`;
     },
-
   },
+
   methods: {
     async searchSuggestions() {
       if (this.searchCity !== '') {
-        const response = await axios.get(`https://api.tomtom.com/search/2/search/${this.searchCity}.json?key=hThUeWOkuwn7VZV1hYMz1TA6KlJr6vsL&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`, {
-        //zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p brusa
-        // hThUeWOkuwn7VZV1hYMz1TA6KlJr6vsL eugeniu
-        });
+        const response = await axios.get(`https://api.tomtom.com/search/2/search/${this.searchCity}.json?key=hThUeWOkuwn7VZV1hYMz1TA6KlJr6vsL&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`);
         this.suggestions = response.data.results;
 
-          this.button = document.querySelector('.btn')
+        this.button = document.querySelector('.btn')
 
-          if (this.suggestions == 0) {
-            this.button.disabled = true
-          }else{
-            this.button.disabled = false
-          }
+        if (this.suggestions == 0) {
+          this.button.disabled = true
+        } else {
+          this.button.disabled = false
+        }
       } else {
         this.suggestions = [];
       }
     },
 
-    // FUNZIONE DI RICERCA INDIRIZZO NEL DB
     async searchAdvancedApartment(city) {
       if (this.searchCity !== '') {
         const response = await axios.get(`http://localhost:8000/api/searchAdvanced`, {
@@ -87,8 +79,8 @@ export default {
         store.apartments = response.data;
         store.city = city;
 
-          this.longitude = response.data[0].longitude; // Aggiorna con i dati della tua API
-          this.latitude = response.data[0].latitude;   // Aggiorna con i dati della tua API
+        this.longitude = response.data[0].longitude;
+        this.latitude = response.data[0].latitude;
         this.$router.push({
           name: 'AdvancedSearch',
           params: {
@@ -101,17 +93,27 @@ export default {
         });
       }
     },
+
     selectSuggestion(suggestion) {
       this.searchCity = suggestion.address.freeformAddress;
       this.suggestions = [];
-      console.log(this.searchCity)
     },
 
     getServices() {
       axios.get(`${store.apartmentsUrl}/api/services`).then((response) => {
         this.services = response.data.results;
-        console.log(this.services)
       });
+    },
+
+    showMapForApartment(longitude, latitude) {
+      let map = tt.map({
+        container: "map",
+        key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
+        center: [longitude, latitude],
+        zoom: 15
+      });
+
+      let marker = new tt.Marker().setLngLat([longitude, latitude]).addTo(map);
     },
   },
 
@@ -123,20 +125,6 @@ export default {
       this.showMapForApartment(this.longitude, this.latitude);
     }
   },
-
-  methods: {
-    //FUNZIONE PER VISUALIZZARE LA MAPPA
-    showMapForApartment(longitude, latitude) {
-      let map = tt.map({
-        container: "map",
-        key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
-        center: [longitude, latitude],
-        zoom: 15
-      });
-
-      let marker = new tt.Marker().setLngLat([longitude, latitude]).addTo(map);
-    }
-  }
 };
 </script>
 
@@ -164,14 +152,14 @@ export default {
                 @input="searchSuggestions"
               >
             </div>
-                      <!-- Suggerimenti -->
-          <div v-if="suggestions.length > 0" class="suggestions">
-            <ul>
-              <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)">
-                {{ suggestion.address.freeformAddress }}
-              </li>
-            </ul>
-          </div>
+            <!-- Suggerimenti -->
+            <div v-if="suggestions.length > 0" class="suggestions">
+              <ul>
+                <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)">
+                  {{ suggestion.address.freeformAddress }}
+                </li>
+              </ul>
+            </div>
           </div>
           <!-- RANGE SEARCH -->
           <div class=" p-2">
@@ -207,20 +195,18 @@ export default {
             <button type="submit" class="btn btn-primary" :disabled="searchCity === ''">Cerca</button>
           </div>
 
-          </form>
-        </div>
-      <div v-if="filteredApartments.length === 0" class="no-results">    <div v-if="filteredApartments.length === 0" class="no-results">
-      <p>-- Ci spiace ma non ci sono risultati --</p>
-    </div>
-    <div v-else>
-      <div id="map" style="width: 100%; height: 500px;"></div>
-      <p>-- Ci spiace ma non ci sono risultati --</p>
+        </form>
+      </div>
+      <div v-if="filteredApartments.length === 0" class="no-results">
+        <p>-- Ci spiace ma non ci sono risultati --</p>
+      </div>
+      <div v-else>
+        <div id="map" style="width: 100%; height: 500px;"></div>
       </div>
       <div v-else>
         <div class="col-10 d-flex flex-wrap justify-content-center my-4">
           <div class="card m-3" style="width: 23rem;" v-for="(apartment, index) in filteredApartments" :key="index">
             <div class="card-image-top">
-              <!-- da sistemare lo storage -->
               <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid" />
             </div>
             <div class="card-body">
@@ -258,8 +244,8 @@ export default {
           </div>
         </div>
       </div>
-      <MapApartament :apartment="filteredApartments" v-if="filteredApartments.length>0"></MapApartament>
     </div>
+    <MapApartament :apartment="filteredApartments" v-if="filteredApartments.length>0"></MapApartament>
   </div>
 </template>
 
@@ -267,6 +253,7 @@ export default {
 .z {
   background-color: red;
 }
+
 .suggestions {
   position: absolute;
   background-color: white;
@@ -275,19 +262,23 @@ export default {
   max-height: 150px;
   overflow-y: auto;
 }
+
 .suggestions ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
+
 .suggestions li {
   cursor: pointer;
   padding: 5px;
   border-bottom: 1px solid #ccc;
 }
+
 .suggestions li:hover {
   background-color: #f0f0f0;
 }
+
 .btn:disabled {
   background-color: gray;
 }
@@ -299,7 +290,6 @@ export default {
   color: red;
 }
 
-// SEARCH FORM
 .bg-color-search{
   background-color: #B2B5E0; 
 }

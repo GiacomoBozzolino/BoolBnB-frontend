@@ -96,8 +96,8 @@ export default {
       </div>
         <!--bottone e loader-->
         <div class="form-group px-2">
-          <button type="submit" class="btn s btn-primary" :disabled="isLoading">
-            <span v-if="!isLoading">Cerca</span>
+          <button type="submit" class="btn btn-color " :disabled="isLoading">
+            <span v-if="!isLoading"><i class="fa-solid fa-magnifying-glass"></i></span>
             <div v-else class="spinner-border spinner-border-sm text-light custom-spinner" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
@@ -108,6 +108,16 @@ export default {
 </template>
 
 <style scoped>
+
+
+/* COLORE TASTO CERCA */
+.btn-color{
+  background-color: #F6FEAA;
+}
+
+.btn-color:hover{
+  background-color: #e3f91b;
+}
 .suggestions {
   position: absolute;
   background-color: white;
