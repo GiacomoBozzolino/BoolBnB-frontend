@@ -20,9 +20,10 @@ export default {
   },
 
   mounted() {
-    axios.get(store.apartmentsUrl+'/api/sponsored')
+    axios.get(store.apartmentsUrl + '/api/sponsored')
       .then((response) => {
-        this.sponsoredApartments = response.data;
+        // Filtra solo gli appartamenti sponsorizzati
+        this.sponsoredApartments = response.data.filter(apartment => apartment.sponsor_id !== null);
         console.log(this.sponsoredApartments);
       })
       .catch((error) => {
