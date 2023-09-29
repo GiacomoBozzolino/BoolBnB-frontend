@@ -4,6 +4,7 @@ import { store } from "../store";
 import AppLoader from '../components/AppLoader.vue';
 import SearchBar from "../components/SearchBar.vue";
 import RenderApartments from "../components/RenderApartments.vue";
+import SposorizedApartments from "../components/SposorizedApartments.vue";
 
 
 export default {
@@ -11,8 +12,8 @@ export default {
   components:{
     AppLoader,
     SearchBar,
-    RenderApartments
-            
+    RenderApartments,
+    SposorizedApartments,  
   },
 
   data() {
@@ -45,6 +46,7 @@ export default {
         <SearchBar @apartmentSearch="filteredApartments"/>
       </div>
     </div>
+    <SposorizedApartments/>
     <RenderApartments/>
   </div>
 </template>

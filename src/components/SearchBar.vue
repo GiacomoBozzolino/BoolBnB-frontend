@@ -8,6 +8,7 @@ export default {
     return {
       store,
       suggestions: [],
+      isLoading: false,
     };
   },
   methods: {
@@ -37,8 +38,9 @@ export default {
 
 // FUNZIONE DI RICERCA INDIRIZZO NEL DB
     async searchApartment(city) {
-      if (store.searchCity !== '') {
-        
+      if (this.searchCity !== '') {
+        try {
+          this.isLoading = true; // Mostra lo spinner
           const response = await axios.get(`http://localhost:8000/api/search`, {
             params: {
               city: city,
@@ -48,13 +50,14 @@ export default {
           store.apartments = response.data;
           store.city = city;
 
-          console.log(store.apartments)
-
+          console.log(store.apartments);
           this.$router.push({ name: 'AdvancedSearch' });
-
-          
-        } 
-       
+        } catch (error) {
+          console.error(error);
+        } finally {
+          this.isLoading = false; // Nascondi lo spinner
+        }
+      }
     },
 
     // FUNZIONE SELEZIONE INDIRIZZO DAI SUGGERIMENTI
@@ -91,11 +94,16 @@ export default {
           </ul>
         </div>
       </div>
-        <div class="form-group px-2 ">
-          <button type="submit" class="btn btn-primary" :disabled="store.searchCity === '' " >Cerca</button>
+        <!--bottone e loader-->
+        <div class="form-group px-2">
+          <button type="submit" class="btn s btn-primary" :disabled="isLoading">
+            <span v-if="!isLoading">Cerca</span>
+            <div v-else class="spinner-border spinner-border-sm text-light custom-spinner" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </button>
         </div>
     </form>
-      <!-- Bottone Cerca -->
   </div>
 </template>
 

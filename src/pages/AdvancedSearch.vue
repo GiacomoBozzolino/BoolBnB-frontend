@@ -5,9 +5,7 @@ import axios from "axios";
 import AppLoader from '../components/AppLoader.vue';
 import SearchBar from "../components/SearchBar.vue";
 import RenderApartments from "../components/RenderApartments.vue";
-import MapApartament from '../components/MapApartament.vue';
-
-
+import MapApartament from "../components/MapApartament.vue";
 
 export default {
   name: "AdvancedSearch",
@@ -31,6 +29,8 @@ export default {
       services: [],
       selectedServices: [],
 
+      longitude: null, // Aggiungi queste due nuove variabili
+      latitude: null,  // Aggiungi queste due nuove variabili
     }
   },
   computed: {
@@ -38,7 +38,10 @@ export default {
     filteredApartments() {
       return store.apartments.filter((apartments) => {
         const query = store.searchApartments.toLowerCase();
-        return apartments.title.toLowerCase().includes(query);
+        return (
+          apartments.title.toLowerCase().includes(query)
+        );
+
       });
     },
     
@@ -68,6 +71,8 @@ export default {
         this.suggestions = [];
       }
     },
+
+    // FUNZIONE DI RICERCA INDIRIZZO NEL DB
     async searchAdvancedApartment(city) {
       if (this.searchCity !== '') {
         const response = await axios.get(`http://localhost:8000/api/searchAdvanced`, {
@@ -81,6 +86,9 @@ export default {
         });
         store.apartments = response.data;
         store.city = city;
+
+          this.longitude = response.data[0].longitude; // Aggiorna con i dati della tua API
+          this.latitude = response.data[0].latitude;   // Aggiorna con i dati della tua API
         this.$router.push({
           name: 'AdvancedSearch',
           params: {
@@ -110,10 +118,31 @@ export default {
   created() {
     this.getServices();
   },
+  mounted() {
+    if (this.longitude && this.latitude) {
+      this.showMapForApartment(this.longitude, this.latitude);
+    }
+  },
+
+  methods: {
+    //FUNZIONE PER VISUALIZZARE LA MAPPA
+    showMapForApartment(longitude, latitude) {
+      let map = tt.map({
+        container: "map",
+        key: "zXBjzKdSap3QJnfDcfFqd0Ame7xXpi1p",
+        center: [longitude, latitude],
+        zoom: 15
+      });
+
+      let marker = new tt.Marker().setLngLat([longitude, latitude]).addTo(map);
+    }
+  }
 };
 </script>
 
 <template>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+
   <div class="container-fluid">
     <div class="row">
       <!-- FORM CONTAINER -->
@@ -178,10 +207,14 @@ export default {
             <button type="submit" class="btn btn-primary" :disabled="searchCity === ''">Cerca</button>
           </div>
 
-        </form>
-      </div>
-      <div v-if="filteredApartments.length === 0" class="no-results">
-        <p>-- Ci spiace ma non ci sono risultati --</p>
+          </form>
+        </div>
+      <div v-if="filteredApartments.length === 0" class="no-results">    <div v-if="filteredApartments.length === 0" class="no-results">
+      <p>-- Ci spiace ma non ci sono risultati --</p>
+    </div>
+    <div v-else>
+      <div id="map" style="width: 100%; height: 500px;"></div>
+      <p>-- Ci spiace ma non ci sono risultati --</p>
       </div>
       <div v-else>
         <div class="col-10 d-flex flex-wrap justify-content-center my-4">
@@ -269,5 +302,17 @@ export default {
 // SEARCH FORM
 .bg-color-search{
   background-color: #B2B5E0; 
+}
+
+.no-results {
+  font-size: larger;
+  text-align: center;
+  margin: 100px;
+  color: red;
+}
+
+.map {
+  height: 500px;
+  width: 100%;
 }
 </style>

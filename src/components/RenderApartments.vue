@@ -19,18 +19,6 @@ export default {
   },
 
   computed:{
-    //FUNZIONE FILTRAGGIO <-------FUNZIONA
-    filteredApartments() {
-      return store.apartments.filter((apartments) => {
-        const query = store.searchApartments.toLowerCase();
-        console.log(query);
-        // Esegui una ricerca per nome, città o numero di stanze
-        return (
-          apartments.title.toLowerCase().includes(query)
-        );
-
-      });
-    },
   },
 
   methods: {
@@ -38,7 +26,6 @@ export default {
       store.loading = true
       axios.get(`${store.apartmentsUrl}/api/apartments`).then((response) => {
         store.apartments = response.data.results;
-        console.log(store.apartments);
         // per il loading
         if(response.data.success){
             store.apartments = response.data.results;
@@ -47,9 +34,15 @@ export default {
       });
     },
 
-    filteredApartments(){
-      
+    // Controlla se l'ID dell'elemento è presente anche nell'array2
+    shouldShowItem() {
+      return store.apartments.filter((apartment) => {
+        return !store.sponsoredApartments.some(
+          (sponsoredApartment) => sponsoredApartment.id === apartment.id
+        );
+      });
     }
+
   },
 
   created() {
@@ -65,7 +58,7 @@ export default {
         <AppLoader/>
       </div>
       <div class="col-12 d-flex flex-wrap my-4" v-else>
-        <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in filteredApartments" :key="index">
+        <div class="card m-3" style="width: 23rem; " v-for="(apartment, index) in shouldShowItem()" :key="index" v-if="shouldShowItem">
           <div class="card-image-top">
             <!-- da sistemare lo storage -->
             <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid" />

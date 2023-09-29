@@ -1,7 +1,10 @@
 <script>
+import AppLoader from '../components/AppLoader.vue';
+
     export default {
         name: "AboutUs",
         components:{
+            AppLoader,
         },
         data() {
             return {
