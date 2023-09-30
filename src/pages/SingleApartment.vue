@@ -89,41 +89,57 @@
 
     
     <div class='container py-3' v-else>
-
-        <div class='row'>
-            <div class="col-6">
-                <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid " :alt="apartment.title"/>
+        <div class='row border-bottom pb-5 border-2'>
+            <div class="col-8">
+                <div class="apartment-content">
+                    <!-- Titolo e Indirizzo -->
+                    <div class="top-text-content mb-3">
+                        <h2>{{ apartment.title}}</h2>
+                        <span ><i class="fa-solid fa-location-dot"></i> {{apartment.address}}</span>
+                    </div>
+                    <!-- Immagine -->
+                    <div class="img-container border-top pt-3">
+                        <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid rounded-5" :alt="apartment.title"/>
+                    </div>
+                    <!-- Apartment description -->
+                    <div class="description border-top mt-3">
+                        <h4 class="mt-2">About</h4>
+                        <p class="my-2 ">{{apartment.description}} </p>
+                    </div>
+                    <!-- numero delle stanze letti e bagni  -->
+                    <div class="mt-3 d-flex">
+                        <div class="me-2"><i class="fa-solid fa-house-user"></i> {{apartment.n_rooms}} stanze &#8226;</div>
+                        <div class="me-2"><i class="fa-solid fa-bed"></i>  {{apartment.n_beds}} letti &#8226;</div>
+                        <div class="me-2"><i class="fa-solid fa-bath"></i> {{apartment.n_bathrooms}} bagni &#8226;</div> 
+                        <div class="me-2"><i class="fa-solid fa-ruler-combined"></i>  {{apartment.square_meters}}m&sup2;</div>
+                    </div>
+                    <!-- Servi -->
+                    <div class="service">
+                        <h4 class="mt-3">Servizi accessori</h4>
+                        <div class="service-container d-flex flex-wrap" >
+                            <span class="me service-color px-2 rounded-pill me-1 my-1" v-for='item in apartment.services' :key='item.id'>
+                                <span v-html="item.icon"></span>
+                                {{item.type}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-6">
-                <ul>
-                    <li class='pb-3'><h2>{{ apartment.title}}</h2></li>
-                    <li><strong>Numero stanze:</strong> {{apartment.n_rooms}}</li>
-                    <li><strong>Numero letti:</strong> {{apartment.n_beds}}</li>
-                    <li><strong>Numero bagni:</strong> {{apartment.n_bathrooms}}</li>
-                    <li><strong>Indirizzo:</strong> {{apartment.address}}</li>
-                    
-                    <li><strong>Dimensione dell'appartamento:</strong> {{apartment.square_meters}} metri quadrati</li>
-                    <li>
-                        <strong>Servizi:</strong>
-                        <span class="badge text-bg-primary text-decoration-none mx-2" v-for='item in apartment.services' :key='item.id'>
-                            {{item.type}}
-                        </span>
-                    </li>
-                </ul>
-            </div>
 
-        </div>
-
-    </div>
-
-    <!-- Map + ContactForm -->
-    <div class="container">
-        <div class="row">
-            <div class="col-12 mt-3">
-                <div class="row justify-content-center">
-                    <MapApartament :apartment="[apartment]" v-if="apartment"/>
+            <!-- Contact form -->
+            <div class="col-4 border-start mt-3">
+                <div class="d-flex justify-content-end flex-column align-items-center">
                     <ContactForm :apartment="apartment"/>
                 </div> 
+            </div>
+        </div>
+    </div>
+
+    <!-- Map -->
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12">
+                <MapApartament :apartment="[apartment]" v-if="apartment"/>
             </div>
         </div>
     </div>
@@ -131,39 +147,17 @@
 </template>
 
 
-
-
-
 <style lang="scss" scoped>
-.col-6{
+  .service-color{
+    background-color: #C1DBE3;
+  }
 
+.img-container{
+    width: 100%;
 
     img{
         width: 100%;
-        border-radius: 20px;
-
-    
     }
-    &:hover{
-       
-
-       img{
-           filter: brightness(50%);
-           transition: 1s;
-       }
-
-        
-       
-    }
-    ul{
-        list-style-type: none;
-
-        // h2{
-        //     border-bottom: 1px solid rgb(158, 152, 152);
-        //     box-shadow: 5px 5px;
-        // }
-    }
-    
 }
-    
+
 </style>

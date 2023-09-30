@@ -74,10 +74,10 @@ export default {
 </script>
 
 <!-- TEMPLATE HTML -->
-<template lang="">
+<template>
     <!-- CONTACT FORM CARD -->
-    <div class="col-12 my-5">
-        <div class="row p-5">
+    <div class="container my-5">
+        <div class="row py-5">
             <!-- CONTACT FORM TITLE -->
             <div class="col-12">
                 <h2 class="text-center">Contattaci</h2>
@@ -86,7 +86,7 @@ export default {
             <div class="col-12">
                 <form @submit.prevent="sendForm()" class="row">
                     <!-- NAME FORM GROUP -->
-                    <div class="col-12 col-md-6 my-3">
+                    <div class="col-12 my-3">
                         <!-- NAME LABEL -->
                         <label class="control-label">Nome e Cognome</label>
                         <!-- NAME INPUT -->
@@ -95,7 +95,7 @@ export default {
                         <span v-for="(error, index) in errors.name" :key="index" class="text-danger">{{ error }}</span>
                     </div>
                     <!-- EMAIL FORM GROUP -->
-                    <div class="col-12 col-md-6 my-3">
+                    <div class="col-12 my-3">
                         <!-- EMAIL LABEL -->
                         <label class="control-label">Email</label>
                         <!-- EMAIL INPUT -->
@@ -116,7 +116,7 @@ export default {
                     <!-- FORM SUBMIT -->
                     <div class="col-12 text-center my-3">
                         <!-- SUBMIT BUTTON -->
-                        <button type="submit" class="btn btn-info btn-bool-pet-care text-white" :disabled="loading">{{ loading ? 'Invio in corso' : 'Invia' }}</button>
+                        <button type="submit" class="btn btn-color" :disabled="loading"><i class="fa-solid fa-paper-plane"></i> {{ loading ? 'Invio in corso' : 'Invia' }}</button>
                     </div>
                 </form>
             </div>
