@@ -12,7 +12,7 @@ export default {
     AppLoader,
     SearchBar,
     RenderApartments,
-    MapApartament,
+    MapApartament, 
   },
 
   data() {
@@ -46,8 +46,10 @@ export default {
       return `${this.distance}km`;
     },
   },
-
+  // Methods
   methods: {
+
+    // FUNZIONE PER I SUGERIMENTI API TOM TOM
     async searchSuggestions() {
       if (this.searchCity !== '') {
         const response = await axios.get(`https://api.tomtom.com/search/2/search/${this.searchCity}.json?key=hThUeWOkuwn7VZV1hYMz1TA6KlJr6vsL&language=it-IT&idxSets=Str&countrySet=IT&typeahead=true`);
@@ -65,6 +67,7 @@ export default {
       }
     },
 
+    // FUNZIONE PER RICERCA AVANZATA
     async searchAdvancedApartment(city) {
       if (this.searchCity !== '') {
         const response = await axios.get(`http://localhost:8000/api/searchAdvanced`, {
@@ -94,17 +97,20 @@ export default {
       }
     },
 
+    // FUNZIONE PER I SUGERIMENTI 
     selectSuggestion(suggestion) {
       this.searchCity = suggestion.address.freeformAddress;
       this.suggestions = [];
     },
 
+    // FUNZIONE CHE SI PRENDE I SERVIZI 
     getServices() {
       axios.get(`${store.apartmentsUrl}/api/services`).then((response) => {
         this.services = response.data.results;
       });
     },
 
+    // FUNZIONE CHE MOSTRA GLI APARTAMENTI SULLA MAPPA 
     showMapForApartment(longitude, latitude) {
       let map = tt.map({
         container: "map",
@@ -117,9 +123,12 @@ export default {
     },
   },
 
+  // Created
   created() {
     this.getServices();
+
   },
+  // Mounted
   mounted() {
     if (this.longitude && this.latitude) {
       this.showMapForApartment(this.longitude, this.latitude);
@@ -206,7 +215,7 @@ export default {
         </div>
       </div>
       <!-- -------------------------------------------------------------------------------- -->
-      <div class="col-10  my-4">
+      <div class="col-10 p-0">
         <!-- SE LA RICERCA NON HA APPARTAMENTI -->
         <div v-if="filteredApartments.length === 0" class="no-results">
           <hr>
@@ -216,33 +225,33 @@ export default {
         <!-- CONTROLLO SE LA RICERCA HA APARTAMENTI -->
         <div v-else class="d-flex flex-wrap justify-content-center">
           <div class="m-3 super-card p-3 rounded-5" style="width: 40rem;" v-for="(apartment, index) in filteredApartments" :key="index">
-          <!-- IMMAGINE -->
-          <div class="card-image-top">
-            <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid rounded-5 " />
-          </div>
-          <!-- CONTENUTO DELLA CARD  -->
-          <div class="card-body text-start mt-2">
-            <h5 class="card-title"><strong>{{ apartment.title }}</strong></h5>
-            <span class=""><i class="fa-solid fa-location-dot"></i> {{ apartment.address }}</span> 
-            <span class="card-text d-block">
-              <span v-for='item in apartment.services' :key='item.id' class="me-2 mt-2" v-html="item.icon"></span>
-            </span>
-            <span class="d-block">
-              <i class="fa-solid fa-ruler-combined"></i> Metri quadri 
-              <strong>{{ apartment.square_meters }}</strong>
-            </span> 
-            <span class="d-block">
-              <i class="fa-solid fa-house-user"></i> Numero stanze
-              <strong>{{ apartment.n_rooms }}</strong>
-            </span> 
-            <span class="d-block">
-              <i class="fa-solid fa-bed"></i> Numeri letti
-              <strong>{{ apartment.n_beds }}</strong>
-            </span> 
-          </div>
-          <div class="card-footer d-flex justify-content-end">
-            <router-link class="btn btn-color border rounded-pill" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
-          </div>
+            <!-- IMMAGINE -->
+            <div class="card-image-top">
+              <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid rounded-5 " />
+            </div>
+            <!-- CONTENUTO DELLA CARD  -->
+            <div class="card-body text-start mt-2">
+              <h5 class="card-title"><strong>{{ apartment.title }}</strong></h5>
+              <span class=""><i class="fa-solid fa-location-dot"></i> {{ apartment.address }}</span> 
+              <span class="card-text d-block">
+                <span v-for='item in apartment.services' :key='item.id' class="me-2 mt-2" v-html="item.icon"></span>
+              </span>
+              <span class="d-block">
+                <i class="fa-solid fa-ruler-combined"></i> Metri quadri 
+                <strong>{{ apartment.square_meters }}</strong>
+              </span> 
+              <span class="d-block">
+                <i class="fa-solid fa-house-user"></i> Numero stanze
+                <strong>{{ apartment.n_rooms }}</strong>
+              </span> 
+              <span class="d-block">
+                <i class="fa-solid fa-bed"></i> Numeri letti
+                <strong>{{ apartment.n_beds }}</strong>
+              </span> 
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+              <router-link class="btn btn-color border rounded-pill" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+            </div>
           </div>
         </div>
       </div>
