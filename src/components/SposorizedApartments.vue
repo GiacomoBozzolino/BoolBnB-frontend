@@ -40,38 +40,39 @@ export default {
 </script>
 
 <template>
-  <div class="jumbotron-sponsored">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 text-center mt-3">
-          <h2><i class="fa-solid fa-star"></i> I nostri locali in evidenza <i class="fa-solid fa-star"></i></h2>
-        </div>
-        <div class="col-12 p-0" v-if="store.loading">
-        </div>
-        <div class="col-12 p-0 d-flex flex-wrap justify-content-center my-4" v-else>
-          <!-- Itera sugli appartamenti sponsorizzati e mostra le informazioni -->
-          <div v-for="apartment in store.sponsoredApartments" :key="apartment.id" class="mx-4 my-4 super-card p-3 rounded-4" style="width: 34rem; ">
-            <!-- IMMAGINE -->
-            <div class="card-image-top">
-              <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid rounded-5 " />
-            </div>
-            <!-- CONTENUTO DELLA CARTA  -->
-            <div class="card-body text-start mt-2">
-              <h5 class="card-title"><strong>{{ apartment.title }}</strong></h5>
-              <span class=""><i class="fa-solid fa-location-dot"></i> {{ apartment.address }}</span> 
-                <span class="card-text d-block">
-                  <span v-for='item in store.apartments.services' :key='item.id'>
-                    <span class="me-2 mt-2" v-html="item.icon"></span>
+  <div v-if="store.sponsoredApartments.length > 0">
+    <div class="jumbotron-sponsored">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 text-center mt-3">
+            <h2><i class="fa-solid fa-star"></i> I nostri locali in evidenza <i class="fa-solid fa-star"></i></h2>
+          </div>
+          <div class="col-12 p-0" v-if="store.loading">
+          </div>
+          <div class="col-12 p-0 d-flex flex-wrap justify-content-center my-4" v-else>
+            <!-- Itera sugli appartamenti sponsorizzati e mostra le informazioni -->
+            <div v-for="apartment in store.sponsoredApartments" :key="apartment.id" class="mx-4 my-4 super-card p-3 rounded-4" style="width: 34rem; ">
+              <!-- IMMAGINE -->
+              <div class="card-image-top">
+                <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid rounded-5 " />
+              </div>
+              <!-- CONTENUTO DELLA CARTA  -->
+              <div class="card-body text-start mt-2">
+                <h5 class="card-title"><strong>{{ apartment.title }}</strong></h5>
+                <span class=""><i class="fa-solid fa-location-dot"></i> {{ apartment.address }}</span> 
+                  <span class="card-text d-block">
+                    <span v-for='item in store.apartments.services' :key='item.id'>
+                      <span class="me-2 mt-2" v-html="item.icon"></span>
+                    </span>
                   </span>
-                </span>
-                <span class="">
-                  <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
-                  <strong>{{ apartment.square_meters }}</strong>
-                </span> 
-
-            </div>
-            <div class="card-footer d-flex justify-content-end">
-              <router-link class="btn btn-color border rounded-pill" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+                  <span class="">
+                    <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
+                    <strong>{{ apartment.square_meters }}</strong>
+                  </span> 
+              </div>
+              <div class="card-footer d-flex justify-content-end">
+                <router-link class="btn btn-color border rounded-pill" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+              </div>
             </div>
           </div>
         </div>
