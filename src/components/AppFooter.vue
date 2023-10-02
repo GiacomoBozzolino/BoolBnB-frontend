@@ -134,7 +134,7 @@ p a:hover{
 }
 
 .jumbotron-footer{
-    background-color: #DCDCDC;
+    background-color: #ffca4a;
 }
 
 li a{

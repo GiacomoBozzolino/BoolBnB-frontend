@@ -112,11 +112,11 @@ export default {
 
 /* COLORE TASTO CERCA */
 .btn-color{
-  background-color: #F6FEAA;
+  background-color: #EF7039;
 }
 
 .btn-color:hover{
-  background-color: #e3f91b;
+  background-color: #1970f4;
 }
 .suggestions {
   position: absolute;

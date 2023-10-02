@@ -45,10 +45,13 @@ export default {
     <div class="container">
       <div class="row">
         <div class="my-4 col-12 d-flex justify-content-center align-items-center">
+          <h4 class="px-4">
+            <i class="fa-solid fa-house-flag ms-1" style="color: #EF7039;"></i>
+            Cerca la tua prossima destinazione 
+          </h4>
           <div class="search-container d-flex ">
             <SearchBar @apartmentSearch="filteredApartments"/>
           </div>
-          <h4 class="ms-5">Cerca la tua prossima destinazione <i class="fa-solid fa-house-flag ms-1"></i></h4>
         </div>
       </div>
     </div>
@@ -74,6 +77,6 @@ export default {
 }
 
 .jumbotron-search{
-  background-color: #C1DBE3;
+  background-color: #ffca4a;
 }
 </style>

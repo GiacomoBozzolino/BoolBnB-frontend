@@ -44,14 +44,14 @@ export default {
     <div class="jumbotron-sponsored">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 text-center mt-3">
-            <h2><i class="fa-solid fa-star"></i> I nostri locali in evidenza <i class="fa-solid fa-star"></i></h2>
+          <div class="col-12 mt-3 mx-3">
+            <h5><i class="fa-solid fa-star" style="color: #EF7039;"></i> I nostri Appartamenti in evidenza <i class="fa-solid fa-star" style="color: #EF7039;"></i></h5>
           </div>
           <div class="col-12 p-0" v-if="store.loading">
           </div>
-          <div class="col-12 p-0 d-flex flex-wrap justify-content-center my-4" v-else>
+          <div class="col-12 p-0 d-flex flex-wrap justify-content-center mb-4" v-else>
             <!-- Itera sugli appartamenti sponsorizzati e mostra le informazioni -->
-            <div v-for="apartment in store.sponsoredApartments" :key="apartment.id" class="mx-4 my-4 super-card p-3 rounded-4" style="width: 34rem; ">
+            <div v-for="apartment in store.sponsoredApartments" :key="apartment.id" class="mx-4 my-2 super-card p-3 rounded-4" style="width: 34rem; ">
               <!-- IMMAGINE -->
               <div class="card-image-top">
                 <img :src="`${store.apartmentsUrl}/storage/${apartment.cover_img}`" class="img-fluid rounded-5 " />
