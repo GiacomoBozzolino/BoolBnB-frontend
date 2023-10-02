@@ -45,7 +45,7 @@ export default {
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse text-end display-manual-flex" id="navbarSupportedContent" >
+                <div class="collapse navbar-collapse text-center display-manual-flex" id="navbarSupportedContent" >
                     <div class="colapse-content">
                         <!-- Right side navbar -->
                         <ul class="navbar-nav">
