@@ -84,7 +84,7 @@ export default {
                                 <a href="#">Nuove funzionalita</a>
                             </li>
                             <li>
-                                <a href="#">Opportunita di lavoro</a>
+                                <a href="#">Opportunità di lavoro</a>
                             </li>
                             <li>
                                 <a href="#">investitori</a>
