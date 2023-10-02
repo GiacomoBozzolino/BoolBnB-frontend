@@ -70,8 +70,10 @@ export default {
   background-color: red;
 }
 
+
+
 .jumbotron-search{
-  background-color: #C1DBE3;
+  background-color: #ffca4a;
 }
 
 @media screen and (max-width: 992px){

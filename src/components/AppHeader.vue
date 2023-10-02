@@ -70,30 +70,29 @@ export default {
 
 <style lang="scss" scoped>
 .logo {
-    color: #000000;
+    color: white;
     transition: background-color 1s;
 }
 
 .logo:hover {
-    background-color: #F6FEAA;
-    color: black;
+    background-color: #FFBC19;
+    color: white;
 }
 
 .link-hover-header {
-    color: #000000;
+    color: white;
 }
 
 .link-hover-header:hover {
-    // background-color: #DFBE99;
-    background-color: #F6FEAA;
+    background-color: #FFBC19;
 }
 
 .nav-background {
-    background-color: #C5ADC5;
+    background-color: #EF7039;
 }
 
 .drop-down:hover {
-    background-color: rgb(206, 227, 245);
+    background-color: #FFBC19;
 }
 
 .fixed {
