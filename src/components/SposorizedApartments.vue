@@ -45,7 +45,7 @@ export default {
       <div class="container-fluid">
         <div class="row">
           <div class="col-12 mt-3 mx-3">
-            <h5><i class="fa-solid fa-star" style="color: #EF7039;"></i> I nostri Appartamenti in evidenza <i class="fa-solid fa-star" style="color: #EF7039;"></i></h5>
+            <h5 class="text-center"><i class="fa-solid fa-star" style="color: #EF7039;"></i> I nostri Appartamenti in evidenza <i class="fa-solid fa-star" style="color: #EF7039;"></i></h5>
           </div>
           <div class="col-12 p-0" v-if="store.loading">
           </div>
