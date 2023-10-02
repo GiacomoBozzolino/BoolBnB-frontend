@@ -252,7 +252,7 @@ export default {
               </span> 
             </div>
             <div class="card-footer d-flex justify-content-end">
-              <router-link class="btn btn-color border rounded-pill" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Guarda il progetto</router-link>
+              <router-link class="btn btn-color border rounded-pill" :to="{name:'SingleApartment', params:{slug:apartment.slug}}">Scopri l'appartamento</router-link>
             </div>
           </div>
         </div>
