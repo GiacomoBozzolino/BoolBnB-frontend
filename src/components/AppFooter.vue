@@ -22,7 +22,7 @@ export default {
         <div class="container">
             <div class="row">
                 <!-- LINK UTILI FOOTER -->
-                <div class="col-12 d-flex align-items-center justify-content-evenly">
+                <div class="col-12 d-flex align-items-center justify-content-evenly footer-flex-lists">
                     <!-- parte dell'assistenza -->
                     <div class="footer-container">
                         <ul class="list-unstyled">
@@ -100,7 +100,7 @@ export default {
 
             <!-- PRIVACY -->
             <hr>
-            <div class="col-12 d-flex justify-content-evenly align-items-center">
+            <div class="col-12 d-flex justify-content-evenly align-items-center footer-flex">
                 <!-- left side privacy -->
                 <div class="privacy-conainter">
                     <p class="m-0">&#169; 2023 BoolBnb, SrL &#8226; 
@@ -143,5 +143,21 @@ li a{
 
 li a:hover{
     text-decoration: underline;
+}
+
+@media screen and (max-width: 792px){
+
+.footer-flex-lists{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+    .footer-flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 }
 </style>

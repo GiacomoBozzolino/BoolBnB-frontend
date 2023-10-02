@@ -44,11 +44,8 @@ export default {
   <div class="jumbotron-search">
     <div class="container">
       <div class="row">
-        <div class="my-4 col-12 d-flex justify-content-center align-items-center">
-          <div class="search-container d-flex ">
-            <SearchBar @apartmentSearch="filteredApartments"/>
-          </div>
-          <h4 class="ms-5">Cerca la tua prossima destinazione <i class="fa-solid fa-house-flag ms-1"></i></h4>
+        <div class="my-2 col-12 d-flex justify-content-center align-items-center">
+          <SearchBar @apartmentSearch="filteredApartments"/>
         </div>
       </div>
     </div>
@@ -75,5 +72,18 @@ export default {
 
 .jumbotron-search{
   background-color: #C1DBE3;
+}
+
+@media screen and (max-width: 992px){
+  .jumbotron-search{
+
+    margin-top: -4px;
+}
+}
+
+@media screen and (max-width: 420px){
+  .jumbotron-search{
+    margin-top: -9px;
+}
 }
 </style>

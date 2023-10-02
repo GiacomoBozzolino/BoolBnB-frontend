@@ -72,9 +72,9 @@ export default {
 
 <template>
   <div class="input-group">
-    <form @submit.prevent="searchApartment(store.searchCity)" autocomplete="off" class="d-flex">
-      <div>
-        <div class="form-group">
+    <form @submit.prevent="searchApartment(store.searchCity)" autocomplete="off" class="d-flex w-100 d-flex justify-content-center">
+
+        <div class="form-group w-50 ">
           
           <input
             type="text"
@@ -86,14 +86,14 @@ export default {
           >
         </div>
         <!-- Suggerimenti -->
-        <div v-if="suggestions.length > 0" class="suggestions">
+        <div v-if="suggestions.length > 0" class="suggestions w-50">
           <ul>
             <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)">
               {{ suggestion.address.freeformAddress }}
             </li>
           </ul>
         </div>
-      </div>
+
         <!--bottone e loader-->
         <div class="form-group px-2">
           <button type="submit" class="btn btn-color " :disabled="isLoading">
@@ -125,6 +125,8 @@ export default {
   z-index: 999;
   max-height: 150px;
   overflow-y: auto;
+  margin-top: 38px;
+  margin-right: 55px;
 }
 
 .suggestions ul {

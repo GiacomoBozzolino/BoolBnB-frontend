@@ -29,24 +29,25 @@ export default {
     <div>
         <nav class="navbar navbar-expand-lg navbar-light nav-background shadow-sm fixed z-3">
             <div class="container">
-                <div class="row d-flex align-items-center justify-content-between w-100">
 
-                    <!-- Left side nav bar -->
-                    <div class="col-4">
-                        <router-link class="navbar-brand d-flex align-items-center transition-logo" :to="{ name: 'Home' }">
-                            <div class="logo-laravel">
-                                <h2 class="logo p-4 rounded-5 shadow-lg"><i class="fa-solid fa-earth-europe"></i>BoolBnB
-                                </h2>
-                            </div>
-                        </router-link>
+                <!-- Left side nav bar -->
+                <router-link class="navbar-brand d-flex align-items-center transition-logo" :to="{ name: 'Home' }">
+                    <div class="logo-laravel ">
+                        <h2 class="logo p-4 rounded-5 shadow-lg"><i class="fa-solid fa-earth-europe"></i>BoolBnB
+                        </h2>
                     </div>
+                </router-link>
 
-                    <!-- Right side navbar -->
-                    <div class="col-8 d-flex align-items-center justify-content-end">
-                        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon">sdlkfgnsekliofsekflmn</span>
-                        </button> -->
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse text-end display-manual-flex" id="navbarSupportedContent" >
+                    <div class="colapse-content">
+                        <!-- Right side navbar -->
                         <ul class="navbar-nav">
                             <li class="nav-item " v-for="(item, index) in menuItems" :key="index">
                                 <router-link class="nav-link fs-4 fw-semibold link-hover-header px-3 py-2 rounded-5" :to="{ name: item.routeName }">
@@ -59,8 +60,10 @@ export default {
                         </ul>
                     </div>
                 </div>
+
             </div>
         </nav>
+        
     </div>
 </template>
 
@@ -99,4 +102,14 @@ export default {
     left: 0;
     right: 0;
 }
+
+@media screen and (min-width: 992px){
+    .display-manual-flex{
+        display: flex;
+        align-items: end;
+        justify-content: end;
+    }
+}
+
+
 </style>
