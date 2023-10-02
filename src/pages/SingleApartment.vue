@@ -103,7 +103,7 @@
                     </div>
                     <!-- Apartment description -->
                     <div class="description border-top mt-3">
-                        <h4 class="mt-2">About</h4>
+                        <h4 class="mt-2">Descrizione</h4>
                         <p class="my-2 ">{{apartment.description}} </p>
                     </div>
                     <!-- numero delle stanze letti e bagni  -->
