@@ -144,7 +144,7 @@ export default {
   <div class="container-fluid">
     <div class="row">
       <!-- FORM CONTAINER -->
-      <div class="col-2 form-container sidebar border-end border-3 bg-color-search ">
+      <div class="col-12 col-lg-3 form-container sidebar border-end border-3 bg-color-search h">
         <div class="border rounded-5 text-center my-3 shadow bg-light-subtle">
           <h3 class="px-2 pt-2">Ricerca avanzata</h3>
         </div>
@@ -215,7 +215,7 @@ export default {
         </div>
       </div>
       <!-- -------------------------------------------------------------------------------- -->
-      <div class="col-10 p-0">
+      <div class="col-12 col-lg-9 p-0">
         <!-- SE LA RICERCA NON HA APPARTAMENTI -->
         <div v-if="filteredApartments.length === 0" class="no-results">
           <hr>
@@ -329,5 +329,11 @@ export default {
 .map {
   height: 500px;
   width: 100%;
+}
+
+@media screen and (max-width: 942px){
+  .h{
+    margin-top: -9px;
+  }
 }
 </style>
