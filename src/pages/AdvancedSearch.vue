@@ -206,7 +206,7 @@ export default {
           </div>
 
         </form>
-        <!-- INZIO MAPA -->
+        <!-- INZIO MAPPA -->
         <div class="mb-4">
           <!-- Button trigger modal -->
           <div id="map" style="width: 100%; height: 500px;">
@@ -234,7 +234,9 @@ export default {
               <h5 class="card-title"><strong>{{ apartment.title }}</strong></h5>
               <span class=""><i class="fa-solid fa-location-dot"></i> {{ apartment.address }}</span> 
               <span class="card-text d-block">
-                <span v-for='item in apartment.services' :key='item.id' class="me-2 mt-2" v-html="item.icon"></span>
+                <span v-for='item in apartment.services' :key='item.id'>
+                  <span class="me-2 mt-2" v-html="item.icon"></span>
+                </span>
               </span>
               <span class="d-block">
                 <i class="fa-solid fa-ruler-combined"></i> Metri quadri 

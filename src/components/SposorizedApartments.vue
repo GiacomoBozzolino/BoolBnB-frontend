@@ -61,9 +61,9 @@ export default {
                 <h5 class="card-title"><strong>{{ apartment.title }}</strong></h5>
                 <span class=""><i class="fa-solid fa-location-dot"></i> {{ apartment.address }}</span> 
                   <span class="card-text d-block">
-                    <span v-for='item in store.apartments.services' :key='item.id'>
-                      <span class="me-2 mt-2" v-html="item.icon"></span>
-                    </span>
+                    <span v-for='item in apartment.services' :key='item.id'>
+                  <span class="me-2 mt-2" v-html="item.icon"></span>
+                </span>
                   </span>
                   <span class="">
                     <i class="fa-solid fa-ruler-combined"></i> Metri quadri:
