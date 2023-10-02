@@ -316,7 +316,7 @@ export default {
 }
 
 .bg-color-search{
-  background-color: #B2B5E0; 
+  background-color: #f2bb3b; 
 }
 
 .no-results {

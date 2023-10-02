@@ -21,7 +21,7 @@ export default {
 .loader {
     border: 16px solid #f3f3f3;
     /* Light grey */
-    border-top: 16px solid #3498db;
+    border-top: 16px solid #EF7039;
     /* Blue */
     border-radius: 50%;
     width: 120px;
