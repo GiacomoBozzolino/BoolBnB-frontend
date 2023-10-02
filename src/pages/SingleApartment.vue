@@ -90,7 +90,7 @@
     
     <div class='container py-3' v-else>
         <div class='row border-bottom pb-5 border-2'>
-            <div class="col-8">
+            <div class="col-12 col-md-8">
                 <div class="apartment-content">
                     <!-- Titolo e Indirizzo -->
                     <div class="top-text-content mb-3">
@@ -127,7 +127,7 @@
             </div>
 
             <!-- Contact form -->
-            <div class="col-4 border-start mt-3">
+            <div class="col-12 col-md-4 border-start mt-3">
                 <div class="d-flex justify-content-end flex-column align-items-center">
                     <ContactForm :apartment="apartment"/>
                 </div> 
